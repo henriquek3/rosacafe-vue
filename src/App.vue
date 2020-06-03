@@ -26,8 +26,10 @@
             }
         },
         mounted() {
-            require('vali-admin/docs/js/main');
-        }
+            //Activate bootstrip tooltips
+            window.$("[data-toggle='tooltip']").tooltip();
+        },
+        methods: {},
     }
 </script>
 

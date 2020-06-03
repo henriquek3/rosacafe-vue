@@ -75,8 +75,7 @@
             }
         },
         mounted() {
-            this.$store.state.showHeader = false;
-            this.$store.state.showSidebar = false;
+            this.$store.commit('unauthenticated');
             window.$('.login-content [data-toggle="flip"]').click(function () {
                 window.$('.login-box').toggleClass('flipped');
                 return false;
@@ -86,7 +85,7 @@
             login() {
                 store.dispatch('login', this.user)
                     .then(() => {
-                        this.$router.push({name: 'Home'});
+                        this.$router.push({name: 'Welcome'});
                     })
                     .catch(error => console.log(error))
                 ;

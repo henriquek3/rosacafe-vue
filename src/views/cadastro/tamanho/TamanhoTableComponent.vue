@@ -55,7 +55,7 @@
                                 </router-link>
                             </td>
                         </tr>
-                        <tr :class="{'table-danger': error}" class="" v-if="!lista.length">
+                        <tr :class="{'table-danger': error}" class="" v-if="!lista.length && !loanding">
                             <td colspan="4">
                                 Nenhum Registro encontrado..
                             </td>
@@ -81,11 +81,12 @@
         mounted() {
             this.$http.get('/tamanho')
                 .then(response => {
+                    console.log('lista ok')
                     this.lista = response.data
                 })
-                .catch(error => {
+                .catch(() => {
                     this.error = true;
-                    console.error(error.message)
+                    //console.error(error.message)
                     window.iziToast.show({
                         title: 'Atenção',
                         message: 'Recurso inacessível neste momento!',

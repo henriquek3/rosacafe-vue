@@ -19,6 +19,12 @@ const routes = [
         meta: {auth: true},
     },
     {
+        path: '/welcome',
+        name: 'Welcome',
+        component: DashboardPage,
+        meta: {auth: true},
+    },
+    {
         path: '/dashboard',
         name: 'Dashboard',
         component: DashboardPage,

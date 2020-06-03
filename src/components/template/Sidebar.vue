@@ -1,7 +1,7 @@
 <template>
     <aside class="app-sidebar">
         <div class="app-sidebar__user">
-            <img class="app-sidebar__user-avatar"
+            <img class="app-sidebar__user-avatar animate__animated animate__fadeIn"
                  src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg"
                  alt="User Image">
             <div>
@@ -18,7 +18,7 @@
             </li>
             <li :class="{'is-expanded': $route.fullPath.split('/')[1] === 'cadastro'}" class="treeview"
                 id="ui-elements">
-                <a class="app-menu__item ripple" data-toggle="treeview" href="javascript:void(0)">
+                <a class="app-menu__item ripple" data-toggle="treeview" @click.prevent="treeviewToggle()" href="#">
                     <i class="app-menu__icon far fa-folder"></i>
                     <span class="app-menu__label">Cadastros</span>
                     <i class="treeview-indicator fas fa-angle-right"></i>
@@ -80,6 +80,25 @@
 <script>
     export default {
         name: "Sidebar",
+        mounted() {
+            // Set initial active toggle
+            window.$("[data-toggle='treeview.'].is-expanded").parent().toggleClass('is-expanded');
+
+            // Toggle Sidebar
+            window.$('[data-toggle="sidebar"]').click(function(event) {
+                event.preventDefault();
+                window.$('.app').toggleClass('sidenav-toggled');
+            });
+        },
+        methods: {
+            // Activate sidebar treeview toggle
+            treeviewToggle() {
+                if (!window.$("[data-toggle='treeview']").parent().hasClass('is-expanded')) {
+                    window.$('.app-menu').find("[data-toggle='treeview']").parent().removeClass('is-expanded');
+                }
+                window.$("[data-toggle='treeview']").parent().toggleClass('is-expanded');
+            },
+        },
     }
 </script>
 
