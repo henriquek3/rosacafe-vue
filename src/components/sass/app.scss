@@ -1,3 +1,4 @@
+@import "~pace-js/themes/white/pace-theme-minimal.css";
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 @import url(https://fonts.googleapis.com/css?family=Exo+2&display=swap);
@@ -13,13 +14,20 @@
 @import "custom-radio-n-checkbox";
 @import "header";
 
-$fa-font-path: "~@fortawesome/fontawesome-free-webfonts/webfonts";
-@import "~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
-@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
-@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-regular.scss";
-@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss";
+//$fa-font-path: "~@fortawesome/fontawesome-free-webfonts/webfonts";
+//@import "~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
+//@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
+//@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-regular.scss";
+//@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss";
 
-// SweetAlert2
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+
 @import "~sweetalert2/src/sweetalert2";
 @import "~izitoast/dist/css/iziToast.min.css";
 @import "~css-ripple-effect/dist/ripple.min.css";
+@import "~animate.css/animate.min.css";
+@import "~animate.css/animate.compat.css";

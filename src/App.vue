@@ -1,12 +1,12 @@
 <template>
-    <body class="app sidebar-mini">
-    <!-- Navbar-->
-    <Header></Header>
-    <!-- Sidebar menu-->
-    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-    <Sidebar></Sidebar>
-    <router-view/>
-    </body>
+    <div class="app sidebar-mini">
+        <!-- Navbar-->
+        <Header v-if="isAuthenticated"></Header>
+        <!-- Sidebar menu-->
+        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+        <Sidebar v-if="isAuthenticated"></Sidebar>
+        <router-view/>
+    </div>
 </template>
 
 <script>
@@ -19,6 +19,11 @@
         components: {
             Sidebar,
             Header
+        },
+        computed: {
+            isAuthenticated() {
+                return this.$store.state.auth.check;
+            }
         },
         mounted() {
             require('vali-admin/docs/js/main');

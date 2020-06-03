@@ -17,7 +17,7 @@
                 <ul class="app-notification dropdown-menu dropdown-menu-right">
                     <li class="app-notification__title">You have 4 new notifications.</li>
                     <div class="app-notification__content">
-                        <li><a class="app-notification__item" href="javascript:;"><span
+                        <li><a class="app-notification__item" href="javascript:"><span
                                 class="app-notification__icon"><span
                                 class="fa-stack fa-lg"><i
                                 class="fa fa-circle fa-stack-2x text-primary"></i><i
@@ -27,7 +27,7 @@
                                 <p class="app-notification__meta">2 min ago</p>
                             </div>
                         </a></li>
-                        <li><a class="app-notification__item" href="javascript:;"><span
+                        <li><a class="app-notification__item" href="javascript:"><span
                                 class="app-notification__icon"><span
                                 class="fa-stack fa-lg"><i
                                 class="fa fa-circle fa-stack-2x text-danger"></i><i
@@ -37,7 +37,7 @@
                                 <p class="app-notification__meta">5 min ago</p>
                             </div>
                         </a></li>
-                        <li><a class="app-notification__item" href="javascript:;"><span
+                        <li><a class="app-notification__item" href="javascript:"><span
                                 class="app-notification__icon"><span
                                 class="fa-stack fa-lg"><i
                                 class="fa fa-circle fa-stack-2x text-success"></i><i
@@ -48,7 +48,7 @@
                             </div>
                         </a></li>
                         <div class="app-notification__content">
-                            <li><a class="app-notification__item" href="javascript:;"><span
+                            <li><a class="app-notification__item" href="javascript:"><span
                                     class="app-notification__icon"><span class="fa-stack fa-lg"><i
                                     class="fa fa-circle fa-stack-2x text-primary"></i><i
                                     class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
@@ -57,7 +57,7 @@
                                     <p class="app-notification__meta">2 min ago</p>
                                 </div>
                             </a></li>
-                            <li><a class="app-notification__item" href="javascript:;"><span
+                            <li><a class="app-notification__item" href="javascript:"><span
                                     class="app-notification__icon"><span class="fa-stack fa-lg"><i
                                     class="fa fa-circle fa-stack-2x text-danger"></i><i
                                     class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
@@ -66,7 +66,7 @@
                                     <p class="app-notification__meta">5 min ago</p>
                                 </div>
                             </a></li>
-                            <li><a class="app-notification__item" href="javascript:;"><span
+                            <li><a class="app-notification__item" href="javascript:"><span
                                     class="app-notification__icon"><span class="fa-stack fa-lg"><i
                                     class="fa fa-circle fa-stack-2x text-success"></i><i
                                     class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
@@ -88,7 +88,9 @@
                 <ul class="dropdown-menu settings-menu dropdown-menu-right">
                     <li><a class="dropdown-item" href="page-user"><i class="fas fa-cog fa-lg"></i> Settings</a></li>
                     <li><a class="dropdown-item" href="page-user"><i class="fas fa-user fa-lg"></i> Profile</a></li>
-                    <li><a class="dropdown-item" href="page-login"><i class="fas fa-sign-out-alt fa-lg"></i> Logout</a>
+                    <li>
+                        <a @click.prevent="logout" class="dropdown-item" href="javascript:void(0)"><i
+                                class="fas fa-sign-out-alt fa-lg"></i> Logout</a>
                     </li>
                 </ul>
             </li>
@@ -97,8 +99,19 @@
 </template>
 
 <script>
+    import store from '../../store/index'
+
     export default {
-        name: "Header"
+        name: "Header",
+        methods: {
+            logout() {
+                store.dispatch('logout')
+                    .then(() => {
+                        this.$router.push({name: 'auth.login'});
+                    })
+                ;
+            }
+        }
     }
 </script>
 

@@ -1,31 +1,34 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
-import {passportConfig} from '../../.env'
+import {AuthService} from "../services/AuthService";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state: {},
-    mutations: {},
+    state: {
+        auth: {
+            check: sessionStorage.getItem('token') !== null,
+        }
+    },
+    mutations: {
+        authenticated(state) {
+            state.auth.check = true;
+        },
+        unauthenticated(state) {
+            state.auth.check = false;
+            sessionStorage.removeItem('token');
+        }
+    },
     actions: {
         login(context, {email, password}) {
-            const data = {
-                password,
-                username: email,
-                grant_type: passportConfig.grantType,
-                client_id: passportConfig.clientId,
-                client_secret: passportConfig.clientSecret,
-                scope: passportConfig.scope,
-            };
-            axios.defaults.withCredentials = true;
-            axios.post('http://localhost:8000/oauth/token', data)
-                .then(response => {
-                    sessionStorage.setItem('token', JSON.stringify(response.data));
-                })
-                .catch(error => console.log(error))
-            ;
+            return AuthService.auth(email, password).then(response => {
+                context.commit('authenticated');
+                return response;
+            });
         },
+        logout(context) {
+            context.commit('unauthenticated')
+        }
     },
     modules: {}
 })

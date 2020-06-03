@@ -11,64 +11,65 @@
         </div>
         <ul class="app-menu">
             <li>
-                <a class="app-menu__item" href="/dashboard"><i
-                        class="app-menu__icon fas fa-tachometer-alt"></i><span
-                        class="app-menu__label">Dashboard</span></a>
+                <router-link class="app-menu__item ripple" exact-active-class="active" to="/dashboard">
+                    <i class="app-menu__icon fas fa-tachometer-alt"></i>
+                    <span class="app-menu__label">Dashboard</span>
+                </router-link>
             </li>
-            <li class="treeview cadastro" id="ui-elements">
-                <a class="app-menu__item" href="#" data-toggle="treeview">
+            <li :class="{'is-expanded': $route.fullPath.split('/')[1] === 'cadastro'}" class="treeview"
+                id="ui-elements">
+                <a class="app-menu__item ripple" data-toggle="treeview" href="#">
                     <i class="app-menu__icon far fa-folder"></i>
                     <span class="app-menu__label">Cadastros</span>
-                    <i class="treeview-indicator fa fa-angle-right"></i>
+                    <i class="treeview-indicator fas fa-angle-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a class="treeview-item" href="/cadastro/tamanho">
-                            <i class="icon fas fa-ruler"></i>
-                            Tamanhos
-                        </a>
+                        <router-link active-class="active" class="treeview-item ripple" to="/cadastro/tamanho">
+                            <i class="icon fas fa-ruler"></i> Tamanhos
+                        </router-link>
                     </li>
                     <li>
-                        <a class="treeview-item" href="/cadastro/cor">
+                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/cor">
                             <i class="icon fas fa-fill-drip"></i>
                             Cores
-                        </a>
+                        </router-link>
                     </li>
                     <li>
-                        <a class="treeview-item" href="/cadastro/grupo">
+                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/grupo">
                             <i class="icon fas fa-cubes"></i>
                             Grupos
-                        </a>
+                        </router-link>
                     </li>
                     <li>
-                        <a class="treeview-item" href="/cadastro/campanha">
+                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/campanha">
                             <i class="icon fas fa-drafting-compass"></i>
                             Campanhas
-                        </a>
+                        </router-link>
                     </li>
                     <li>
-                        <a class="treeview-item" href="/cadastro/ciclo">
+                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/ciclo">
                             <i class="icon fas fa-people-arrows"></i>
                             Ciclos
-                        </a>
+                        </router-link>
                     </li>
                     <li>
-                        <a class="treeview-item" href="/cadastro/composicao">
+                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/composicao">
                             <i class="icon fas fa-sliders-h"></i>
                             Composições
-                        </a>
+                        </router-link>
                     </li>
                     <li>
-                        <a class="treeview-item" href="/cadastro/marca">
+                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/marca">
                             <i class="icon far fa-copyright"></i>
                             Marcas
-                        </a>
+                        </router-link>
                     </li>
                     <li>
-                        <a class="treeview-item" href="/cadastro/produto">
+                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/produto">
                             <i class="icon fas fa-tshirt"></i>
                             Produtos
-                        </a>
+                        </router-link>
                     </li>
                 </ul>
             </li>
