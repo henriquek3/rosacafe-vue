@@ -11,7 +11,7 @@
 
 <script>
     // @ is an alias to /src
-    import Sidebar from '@/components/template/Sidebar.vue';
+    import Sidebar from './components/template/Sidebar.vue';
     import Header from "./components/template/Header";
 
     export default {

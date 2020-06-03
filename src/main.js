@@ -7,6 +7,9 @@ import './plugins/axios'
 import 'popper.js'
 import iziToast from 'izitoast';
 import $ from 'jquery'
+//import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+//Vue.use(BootstrapVue)
+//Vue.use(IconsPlugin)
 
 window.iziToast = iziToast;
 global.$ = $;

@@ -4,10 +4,10 @@
             <div class="cover"></div>
         </section>
         <section class="login-content">
-            <div class="logo">
+            <div class="logo animate__animated animate__fadeInDown">
                 <h1>Rosa Café App</h1>
             </div>
-            <div class="login-box">
+            <div class="login-box animate__animated animate__fadeIn animate__slower">
                 <form @submit.prevent="login()" class="login-form" method="post">
                     <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>Login</h3>
                     <div class="form-group">
@@ -33,7 +33,8 @@
                         </div>
                     </div>
                     <div class="form-group btn-container">
-                        <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>Conectar
+                        <button class="btn btn-primary btn-block ripple shadow-sm"><i
+                                class="fa fa-sign-in fa-lg fa-fw"></i>Conectar
                         </button>
                     </div>
                 </form>
@@ -42,10 +43,11 @@
                     <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Recuperar senha ?</h3>
                     <div class="form-group">
                         <label class="control-label">E-Mail</label>
-                        <input class="form-control" placeholder="Email" type="text">
+                        <input class="form-control" disabled placeholder="Email" type="email">
                     </div>
                     <div class="form-group btn-container">
-                        <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>Resetar Senha
+                        <button class="btn btn-primary btn-block ripple shadow-sm" disabled><i
+                                class="fa fa-unlock fa-lg fa-fw"></i>Resetar Senha
                         </button>
                     </div>
                     <div class="form-group mt-3">

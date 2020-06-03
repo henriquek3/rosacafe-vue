@@ -18,7 +18,7 @@
             </li>
             <li :class="{'is-expanded': $route.fullPath.split('/')[1] === 'cadastro'}" class="treeview"
                 id="ui-elements">
-                <a class="app-menu__item ripple" data-toggle="treeview" href="#">
+                <a class="app-menu__item ripple" data-toggle="treeview" href="javascript:void(0)">
                     <i class="app-menu__icon far fa-folder"></i>
                     <span class="app-menu__label">Cadastros</span>
                     <i class="treeview-indicator fas fa-angle-right"></i>
