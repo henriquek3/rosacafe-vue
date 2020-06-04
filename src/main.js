@@ -8,13 +8,15 @@ import 'popper.js'
 import iziToast from 'izitoast';
 import $ from 'jquery'
 import TWEEN from '@tweenjs/tween.js'
+
 window.TWEEN = TWEEN;
-//import TWEEN = require('@tweenjs/tween.js');
 
 window.iziToast = iziToast;
 global.$ = $;
 require('bootstrap');
 require('pace-js/pace.min')
+require('datatables')
+require('datatables.net-bs4')
 
 Vue.config.productionTip = false
 
