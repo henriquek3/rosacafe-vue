@@ -28,6 +28,7 @@
         mounted() {
             //Activate bootstrip tooltips
             window.$("[data-toggle='tooltip']").tooltip();
+            window.$('[data-toggle="popover"]').popover();
         },
         methods: {},
     }
