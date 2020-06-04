@@ -1,0 +1,14 @@
+.app-menu__item__label {
+  color: $primary-color;
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 1;
+  padding: 10px 20px;
+  text-transform: capitalize;
+  visibility: visible;
+  width: 100%;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+  -webkit-transition: opacity 0.3s linear;
+  transition: opacity 0.3s linear;
+}

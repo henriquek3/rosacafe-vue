@@ -8,6 +8,9 @@ import TamanhoTableComponent from "../views/cadastro/tamanho/TamanhoTableCompone
 import TamanhoFormComponent from "../views/cadastro/tamanho/TamanhoFormComponent";
 import NotFoundPage from "../views/NotFoundPage";
 import LoginPage from "../views/auth/LoginPage";
+import CidadePage from "../views/cadastro/cidade/CidadePage";
+import CidadeTableComponent from "../views/cadastro/cidade/CidadeTableComponent";
+import CidadeFormComponent from "../views/cadastro/cidade/CidadeFormComponent";
 
 Vue.use(VueRouter)
 
@@ -34,6 +37,7 @@ const routes = [
         path: '/cadastro',
         props: true,
         component: DefaultRouteBlankComponent,
+        meta: {auth: true},
         children: [
             {
                 path: 'tamanho',
@@ -60,8 +64,32 @@ const routes = [
                     },
                 ]
             },
+            {
+                path: 'cidade',
+                component: CidadePage,
+                props: true,
+                meta: {auth: true},
+                children: [
+                    {
+                        path: '',
+                        props: true,
+                        component: CidadeTableComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: 'novo',
+                        component: CidadeFormComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: ':id',
+                        props: true,
+                        component: CidadeFormComponent,
+                        meta: {auth: true},
+                    },
+                ]
+            },
         ],
-        meta: {auth: true},
     },
     {
         path: '/about',

@@ -71,8 +71,17 @@
                             Produtos
                         </router-link>
                     </li>
+                    <hr class="mt-2 mb-1" style="width: 200px;">
+                    <li>
+                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/cidade">
+                            <i class="icon fas fa-map-marker-alt"></i>
+                            Cidades
+                        </router-link>
+                    </li>
                 </ul>
             </li>
+            <hr class="mt-2 mb-1" style="width: 200px;"><!-- Módulo Cliente -->
+            <li class="app-menu__item__label">Módulo Cliente</li>
         </ul>
     </aside>
 </template>
@@ -85,7 +94,7 @@
             window.$("[data-toggle='treeview.'].is-expanded").parent().toggleClass('is-expanded');
 
             // Toggle Sidebar
-            window.$('[data-toggle="sidebar"]').click(function(event) {
+            window.$('[data-toggle="sidebar"]').click(function (event) {
                 event.preventDefault();
                 window.$('.app').toggleClass('sidenav-toggled');
             });
