@@ -120,7 +120,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    !store.state.auth.check && to.meta.auth ? router.push({name: 'auth.login'}) : next();
+    !store.state.login.auth.check && to.meta.auth ? router.push({name: 'auth.login'}) : next();
 });
 
 export default router

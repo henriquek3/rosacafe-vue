@@ -21,7 +21,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-search"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="Pesquisar..." type="text">
+                                <input class="form-control" placeholder="Pesquisar..." type="text"
+                                       @input="myInfo($event.target.value)">
                                 <!--<div class="input-group-append">
                                     <button class="btn btn-sm btn-primary">Pesquisar</button>
                                 </div>-->
@@ -42,20 +43,12 @@
                                     <option value="100">100</option>
                                 </select>
                             </div>
-                            <!--<select name="per_page" id="per_page" class="form-control"
-                                    @change="getDataTable(1, $event.target.value)">
-                                <option value="5" selected>5</option>
-                                <option value="15">15</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>-->
                         </div>
                     </form>
                     <div class="table-responsive">
                         <table class="table table-striped table-sm">
-                            <caption>Mostrando {{this.laravelData.from}} até {{this.laravelData.to}} de
-                                {{this.laravelData.total}} registros
+                            <caption>Mostrando {{dataTable.from}} até {{dataTable.to}} de
+                                {{dataTable.total}} registros
                             </caption>
                             <thead>
                             <tr>
@@ -75,7 +68,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr :key="resource.id" class="animated fadeIn" v-else v-for="resource in laravelData.data">
+                            <tr :key="resource.id" class="animated fadeIn" v-else v-for="resource in dataTable.data">
                                 <td>{{resource.id}}</td>
                                 <td>{{resource.nome}}</td>
                                 <td>{{resource.estado.nome}}</td>
@@ -86,7 +79,7 @@
                                     </router-link>
                                 </td>
                             </tr>
-                            <tr :class="{'table-danger': error}" class="" v-if="!laravelData.data.length && !loanding">
+                            <tr :class="{'table-danger': error}" class="" v-if="!dataTable.data.length && !loanding">
                                 <td colspan="4">
                                     Nenhum Registro encontrado..
                                 </td>
@@ -101,9 +94,10 @@
                     </div>
                 </div>
                 <div class="tile-footer">
-                    <!--<PaginationTableComponent totalPerPage="25" resource="cidade"></PaginationTableComponent>-->
-                    <pagination class="animate__animated animate__slower animate__fadeIn" :data="laravelData"
+                    <pagination class="animate__animated animate__slower animate__fadeIn" :data="dataTable"
                                 @pagination-change-page="getDataTable" :limit="5" :align="'center'">
+                        <span slot="prev-nav"><i class="fas fa-angle-left mr-1"></i> Anterior</span>
+                        <span slot="next-nav">Próximo <i class="fas fa-angle-right ml-1"></i></span>
                     </pagination>
                 </div>
             </div>
@@ -112,20 +106,20 @@
 </template>
 
 <script>
-    //import PaginationTableComponent from "../../../components/table/PaginationTableComponent";
     export default {
         name: "CidadeTableComponent",
         components: {
-            //PaginationTableComponent
             pagination: require('laravel-vue-pagination')
         },
         data: function () {
             return {
                 loanding: true,
                 error: false,
-                laravelData: {
-                    data: []
-                },
+                dataTable: {data: []},
+                payload: {
+                    resource: 'cidade',
+                    with: 'estado'
+                }
             }
         },
         computed: {},
@@ -133,11 +127,23 @@
             this.getDataTable();
         },
         methods: {
-            getDataTable(page = 1, limit = 5) {
+            myInfo(value) {
+                if (value.length > 0) {
+                    this.getDataTable(1, 5, value)
+                }
+            },
+            getDataTable(page = 1, limit = 5, search = '') {
                 this.loanding = true;
-                this.$http.get('/cidade?page=' + page + '&with=estado' + '&limit=' + limit)
+                const url = '/' + this.payload.resource + '?'
+                    + 'page=' + page
+                    + '&with=' + this.payload.with
+                    + '&limit=' + limit
+                    + '&search=' + search
+                ;
+
+                this.$http.get(url)
                     .then(response => {
-                        this.laravelData = response.data
+                        this.dataTable = response.data
                     })
                     .catch((err) => {
                         this.error = true;

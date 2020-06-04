@@ -22,7 +22,7 @@
         },
         computed: {
             isAuthenticated() {
-                return this.$store.state.auth.check;
+                return this.$store.state.login.auth.check;
             }
         },
         mounted() {
