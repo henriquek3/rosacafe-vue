@@ -47,7 +47,6 @@
         computed: {},
         mounted() {
             const _this = this;
-
             window.$('#table').DataTable({
                 processing: true,
                 serverSide: true,
@@ -87,19 +86,16 @@
                 },
                 rowCallback: function (row, data) {
                     window.$(row).on('click', 'button', function () {
-                        //_this.$router.push(`/cadastro/cidade/${data.id}`);
-                        _this.getResourceById(data.id);
+                        _this.getResourceByData(data);
                     })
                 },
             });
         },
         methods: {
-            getResourceById(id) {
-                console.log('fn getResourceById')
-                const config = {id: id, resource: 'cidade'};
-                this.$store.dispatch('getResourceById', config).then(()=>{
-                    this.$router.push(`/cadastro/cidade/${id}`)
-                });
+            getResourceByData(data) {
+                data.resource = 'cidade';
+                this.$store.commit('forms/updateFormResource', data)
+                this.$router.push(`/cadastro/${data.resource}/${data.id}`);
             }
         },
     }

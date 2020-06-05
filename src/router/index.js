@@ -73,6 +73,7 @@ const routes = [
                     {
                         path: '',
                         props: true,
+                        name: 'cidade',
                         component: CidadeTableComponent,
                         meta: {auth: true},
                     },

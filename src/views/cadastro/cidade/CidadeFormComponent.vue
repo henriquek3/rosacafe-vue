@@ -12,18 +12,17 @@
                     <h3 class="title" v-else>Novo cidade</h3>
                 </div>
                 <div class="tile-body">
-                    <form action="" class="row" id="formResource" method="post">
+                    <form action="" class="row" id="formResource" method="post" @submit.prevent="saveData()">
                         <div class="form-group col-xl-6">
                             <label class="control-label">Nome</label>
                             <input class="form-control" maxlength="255" name="nome" placeholder="Nome do cidade"
-                                   required
+                                   required v-model="formResource.nome"
                                    type="text" value="">
                         </div>
                         <div class="form-group col-xl-6">
-                            <label class="control-label">Apelido</label>
-                            <input class="form-control" maxlength="10" name="apelido" placeholder="Apelido do cidade"
-                                   required
-                                   type="text" value="">
+                            <label class="control-label">Código Município</label>
+                            <input class="form-control" name="municipio_codigo" placeholder="Código de Município"
+                                   required type="text" value="" v-model="formResource.municipio_codigo">
                         </div>
                     </form>
                 </div>
@@ -32,7 +31,7 @@
                     <button class="btn btn-primary shadow-sm ripple mr-2" form="formResource" type="submit"><i
                             class="fa fa-fw fa-lg fa-check-circle"></i>Salvar
                     </button>
-                    <button class="btn btn-danger shadow-sm ripple mr-2" type="submit" v-if="id">
+                    <button class="btn btn-danger shadow-sm ripple mr-2" type="submit" v-if="id" @click="deleteData()">
                         <i class="fa fa-fw fa-lg fa-minus-circle"></i>Excluir
                     </button>
                     <router-link class="btn btn-secondary shadow-sm ripple" to="/cadastro/cidade">
@@ -48,7 +47,22 @@
 <script>
     export default {
         name: "CidadeFormComponent",
-        props: ['id']
+        props: ['id'],
+        computed: {
+            formResource: function () {
+                return this.$store.state.forms.formResource;
+            }
+        },
+        methods: {
+            saveData() {
+                this.$store.dispatch('forms/putResource', this.formResource)
+            },
+            deleteData() {
+                this.$store.dispatch('forms/deleteResource', this.formResource)
+            }
+        },
+        mounted() {
+        }
     }
 </script>
 

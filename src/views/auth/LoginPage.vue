@@ -61,8 +61,6 @@
 </template>
 
 <script>
-    import store from '../../store/index'
-
     export default {
         name: "LoginPage",
         data() {
@@ -75,7 +73,7 @@
             }
         },
         mounted() {
-            this.$store.login.commit('unauthenticated');
+            this.$store.commit('login/unauthenticated');
             window.$('.login-content [data-toggle="flip"]').click(function () {
                 window.$('.login-box').toggleClass('flipped');
                 return false;
@@ -83,7 +81,7 @@
         },
         methods: {
             login() {
-                store.login.dispatch('login', this.user)
+                this.$store.dispatch('login/login', this.user)
                     .then(() => {
                         this.$router.push({name: 'Welcome'});
                     })
