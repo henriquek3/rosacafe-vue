@@ -1,50 +1,67 @@
 <template>
     <div class="row"><!--add campo busto, cintura e quadril-->
         <div class="col-md-12">
-            <div class="tile">
+            <ValidationObserver v-slot="{invalid}">
+                <div class="tile">
 
-                <div class="tile-title-w-btn line-head">
-                    <template v-if="id">
-                        <h3 class="title">Editar Tamanho</h3>
-                        <button class="btn btn-primary btn-sm shadow-sm ripple" @click="newResource()">
-                            <i class="fa fa-plus mr-0"></i>
+                    <div class="tile-title-w-btn line-head">
+                        <template v-if="id">
+                            <h3 class="title">Editar Cor</h3>
+                            <button class="btn btn-primary btn-sm shadow-sm ripple" @click="newResource()">
+                                <i class="fa fa-plus mr-0"></i>
+                            </button>
+                        </template>
+                        <h3 class="title" v-else>Nova Cor</h3>
+                    </div>
+
+                    <div class="tile-body">
+
+                        <form action="" class="row" id="formResource" method="post"
+                              @submit.prevent="saveData(resource)">
+
+                            <div class="form-group col-md-6">
+                                <ValidationProvider name="Nome" v-slot="{valid, errors,classes}"
+                                                    rules="required|min:4|alpha_spaces|max:100">
+                                    <label class="control-label">Nome</label>
+                                    <input class="form-control" maxlength="255" name="nome"
+                                           :class="classes"
+                                           placeholder="Nome da Cor"
+                                           required v-model="resource.nome"
+                                           type="text" value="">
+                                    <span class="invalid-feedback">{{errors[0]}}</span>
+                                </ValidationProvider>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <ValidationProvider name="Código" v-slot="{valid, errors,classes}"
+                                                    rules="required|min:3|max:10">
+                                    <label class="control-label">Código</label>
+                                    <input class="form-control" name="codigo" placeholder="Código da Cor"
+                                           required v-model="resource.codigo" :class="classes"
+                                           type="text">
+                                    <span class="invalid-feedback">{{errors[0]}}</span>
+                                </ValidationProvider>
+
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tile-footer text-center">
+                        <button class="btn btn-primary shadow-sm ripple mr-2" form="formResource" type="submit"
+                                :disabled="invalid">
+                            <i class="fa fa-fw fa-lg fa-check-circle"></i>Salvar
                         </button>
-                    </template>
-                    <h3 class="title" v-else>Novo Tamanho</h3>
+                        <button class="btn btn-danger shadow-sm ripple mr-2" type="submit" v-if="id"
+                                @click="deleteData(resource)">
+                            <i class="fa fa-fw fa-lg fa-minus-circle"></i>Excluir
+                        </button>
+                        <router-link class="btn btn-secondary shadow-sm ripple" to="/cadastro/cor">
+                            <i class="fa fa-fw fa-lg fa-times-circle"></i>Cancelar
+                        </router-link>
+                    </div>
+
                 </div>
-
-                <div class="tile-body">
-                    <form action="" class="row" id="formResource" method="post" @submit.prevent="saveData(resource)">
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Nome</label>
-                            <input class="form-control" maxlength="255" name="nome" placeholder="Nome da Cor"
-                                   required v-model="resource.nome"
-                                   type="text" value="">
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Código</label>
-                            <input class="form-control" maxlength="10" name="codigo" placeholder="Código da Cor"
-                                   required v-model="resource.codigo"
-                                   type="text" value="">
-                        </div>
-                    </form>
-                </div>
-
-                <div class="tile-footer text-center">
-                    <button class="btn btn-primary shadow-sm ripple mr-2" form="formResource" type="submit"><i
-                            class="fa fa-fw fa-lg fa-check-circle"></i>Salvar
-                    </button>
-                    <button class="btn btn-danger shadow-sm ripple mr-2" type="submit" v-if="id"
-                            @click="deleteData(resource)">
-                        <i class="fa fa-fw fa-lg fa-minus-circle"></i>Excluir
-                    </button>
-                    <router-link class="btn btn-secondary shadow-sm ripple" to="/cadastro/cor">
-                        <i class="fa fa-fw fa-lg fa-times-circle"></i>Cancelar
-                    </router-link>
-                </div>
-
-            </div>
+            </ValidationObserver>
         </div>
     </div>
 </template>
@@ -54,7 +71,7 @@
 
     export default {
         name: "CorFormComponent",
-        props: ['id'],
+        props: ['id', 'required'],
         computed: {
             resource: {
                 get() {
@@ -67,6 +84,7 @@
         },
         data() {
             return {
+                email: '',
                 urlApi: '/cor',
                 urlCallback: '/cadastro/cor'
             }
@@ -77,7 +95,6 @@
             if (this.id) {
                 this.getResource().then(res => this.resource = res)
             }
-            console.log(this.id)
         },
         methods: {
             saveData(payload) {
