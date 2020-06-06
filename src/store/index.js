@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import login from './modules/login'
 import forms from "./modules/forms";
+import datatables from "./modules/datatables";
 
 Vue.use(Vuex)
 
@@ -11,6 +12,7 @@ export default new Vuex.Store({
     actions: {},
     modules: {
         login,
-        forms
+        forms,
+        datatables
     }
 })

@@ -12,7 +12,7 @@
                     <h3 class="title" v-else>Novo cidade</h3>
                 </div>
                 <div class="tile-body">
-                    <form action="" class="row" id="formResource" method="post" @submit.prevent="saveData()">
+                    <form action="" class="row" id="formulario" method="post" @submit.prevent="saveData()">
                         <div class="form-group col-xl-6">
                             <label class="control-label">Nome</label>
                             <input class="form-control" maxlength="255" name="nome" placeholder="Nome do cidade"
@@ -28,8 +28,8 @@
                 </div>
 
                 <div class="tile-footer text-center">
-                    <button class="btn btn-primary shadow-sm ripple mr-2" form="formResource" type="submit"><i
-                            class="fa fa-fw fa-lg fa-check-circle"></i>Salvar
+                    <button class="btn btn-primary shadow-sm ripple mr-2" form="formulario" type="submit">
+                        <i class="fa fa-fw fa-lg fa-check-circle"></i>Salvar
                     </button>
                     <button class="btn btn-danger shadow-sm ripple mr-2" type="submit" v-if="id" @click="deleteData()">
                         <i class="fa fa-fw fa-lg fa-minus-circle"></i>Excluir
@@ -49,20 +49,45 @@
         name: "CidadeFormComponent",
         props: ['id'],
         computed: {
-            formResource: function () {
-                return this.$store.state.forms.formResource;
+            formResource: {
+                get() {
+                    return this.$store.state.forms.formResource;
+                },
+                set(value) {
+                    this.$store.commit('forms/setFormResource', value)
+                },
             }
+        },
+        data() {
+            return {}
         },
         methods: {
             saveData() {
-                this.$store.dispatch('forms/putResource', this.formResource)
+                this.$store.dispatch('forms/putResource')
             },
             deleteData() {
                 this.$store.dispatch('forms/deleteResource', this.formResource)
+            },
+            getData() {
+                this.resource = this.formData
+            },
+            clearForm() {
+                this.resource.nome = '';
+                this.resource.municipio_codigo = '';
+            },
+        },
+        /*mounted() {
+            this.clearForm()
+            if (this.$route.params.id) {
+                this.getData();
             }
         },
-        mounted() {
-        }
+        updated() {
+            this.clearForm();
+            if (this.$route.params.id) {
+                this.getData();
+            }
+        }*/
     }
 </script>
 

@@ -11,8 +11,8 @@
                 <li class="breadcrumb-item"><a href="#">Ver Todos</a></li>
             </ul>
         </div>
-        <transition enter-active-class="animated fadeIn animate__faster"
-                    leave-active-class="animated fadeOut animate__faster" mode="out-in">
+        <transition enter-active-class="animated animate__zoomIn animate__faster"
+                    leave-active-class="animated animate__zoomIn animate__faster" mode="out-in">
             <router-view/>
         </transition>
     </main>

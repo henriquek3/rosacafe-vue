@@ -30,31 +30,31 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/cor">
+                        <router-link class="treeview-item ripple" active-class="active" to="/cadastro/cor">
                             <i class="icon fas fa-fill-drip"></i>
                             Cores
                         </router-link>
                     </li>
                     <li>
-                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/grupo">
+                        <router-link class="treeview-item ripple" active-class="active" to="/cadastro/grupo">
                             <i class="icon fas fa-cubes"></i>
                             Grupos
                         </router-link>
                     </li>
                     <li>
-                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/campanha">
+                        <router-link class="treeview-item ripple" active-class="active" to="/cadastro/campanha">
                             <i class="icon fas fa-drafting-compass"></i>
                             Campanhas
                         </router-link>
                     </li>
                     <li>
-                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/ciclo">
+                        <router-link class="treeview-item ripple" active-class="active" to="/cadastro/ciclo">
                             <i class="icon fas fa-people-arrows"></i>
                             Ciclos
                         </router-link>
                     </li>
                     <li>
-                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/composicao">
+                        <router-link class="treeview-item ripple" active-class="active" to="/cadastro/composicao">
                             <i class="icon fas fa-sliders-h"></i>
                             Composições
                         </router-link>
@@ -66,14 +66,14 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/produto">
+                        <router-link class="treeview-item ripple" active-class="active" to="/cadastro/produto">
                             <i class="icon fas fa-tshirt"></i>
                             Produtos
                         </router-link>
                     </li>
                     <hr class="mt-2 mb-1" style="width: 200px;">
                     <li>
-                        <router-link class="treeview-item ripple" exact-active-class="active" to="/cadastro/cidade">
+                        <router-link class="treeview-item ripple" active-class="active" to="/cadastro/cidade">
                             <i class="icon fas fa-map-marker-alt"></i>
                             Cidades
                         </router-link>

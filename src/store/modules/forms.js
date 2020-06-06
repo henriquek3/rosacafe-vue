@@ -1,23 +1,31 @@
 import Vue from 'vue'
 import router from "../../router";
+
 // initial state
-const state = () => ({
-    formResource: {}
-})
+const state = {
+    formResource: {
+        nome: 'Jean',
+        municipio_codigo: 344
+    }
+}
 
 // getters
 const getters = {
-    data: state => {
+    getFormResource: state => {
         return state.formResource;
     }
 }
 
 // actions
 const actions = {
-    putResource({commit}, data) {
-        return Vue.prototype.$http.put(`/${data.resource}/${data.id}`, data)
+    loadResource({commit}, payload) {
+        commit('setFormResource', payload);
+        router.push(`${payload.path}/${payload.id}`);
+    },
+    putResource({commit, state}) {
+        return Vue.prototype.$http.put(`/${state.formResource.resource}/${state.formResource.id}`, state.formResource)
             .then(() => {
-                commit('updateFormResource', data);
+                commit('setFormResource', state.formResource);
             }).then(() => {
                 window.iziToast.show({
                     title: 'Sucesso!',
@@ -40,7 +48,8 @@ const actions = {
     deleteResource({commit}, data) {
         return Vue.prototype.$http.delete(`/${data.resource}/${data.id}`)
             .then(() => {
-                commit('deleteFormResource', data);
+                commit('deleteFormResource');
+                router.push({name: data.resource})
             })
             .then(() => {
                 window.iziToast.show({
@@ -60,17 +69,19 @@ const actions = {
                     timeout: 10000,
                 });
             });
-    }
+    },
 }
 
 // mutations
 const mutations = {
-    updateFormResource(state, data) {
-        state.formResource = data;
+    setFormResource(state, payload) {
+        state.formResource = payload;
     },
-    deleteFormResource(state, data) {
+    deleteFormResource(state) {
         state.formResource = [];
-        router.push({name: data.resource})
+    },
+    clearFormResource(state) {
+        state.formResource = [];
     },
 }
 

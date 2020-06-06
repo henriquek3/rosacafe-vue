@@ -3,7 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import './plugins/axios'
+import './plugins/index'
 import 'popper.js'
 import iziToast from 'izitoast';
 import $ from 'jquery'
