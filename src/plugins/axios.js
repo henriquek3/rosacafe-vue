@@ -17,7 +17,7 @@ Vue.use({
         Vue.prototype.$http.interceptors.request.use(request => {
             const token = sessionStorage.getItem('token');
             if (!token) {
-                Vue.prototype.$store.commit('unauthenticated');
+                Vue.prototype.$store.commit('login/unauthenticated');
                 return Vue.prototype.$router.push({name: 'auth.login'});
             }
             const accessToken = JSON.parse(token).access_token;

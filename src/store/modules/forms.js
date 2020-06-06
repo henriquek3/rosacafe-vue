@@ -3,26 +3,25 @@ import router from "../../router";
 
 // initial state
 const state = {
-    formResource: {
-        nome: 'Jean',
-        municipio_codigo: 344
-    }
+    registro: {}
 }
 
 // getters
 const getters = {
-    getFormResource: state => {
-        return state.formResource;
-    }
+    getRegistro: () => {
+        console.log('getRegistros')
+        return JSON.parse(sessionStorage.getItem('registro'));
+    },
 }
 
 // actions
 const actions = {
     loadResource({commit}, payload) {
-        commit('setFormResource', payload);
+        console.log('loadResource')
+        commit('setRegistro', payload);
         router.push(`${payload.path}/${payload.id}`);
     },
-    putResource({commit, state}) {
+    requestPut({commit, state}) {
         return Vue.prototype.$http.put(`/${state.formResource.resource}/${state.formResource.id}`, state.formResource)
             .then(() => {
                 commit('setFormResource', state.formResource);
@@ -45,7 +44,7 @@ const actions = {
                 });
             });
     },
-    deleteResource({commit}, data) {
+    requestDelete({commit}, data) {
         return Vue.prototype.$http.delete(`/${data.resource}/${data.id}`)
             .then(() => {
                 commit('deleteFormResource');
@@ -74,15 +73,11 @@ const actions = {
 
 // mutations
 const mutations = {
-    setFormResource(state, payload) {
-        state.formResource = payload;
-    },
-    deleteFormResource(state) {
-        state.formResource = [];
-    },
-    clearFormResource(state) {
-        state.formResource = [];
-    },
+    setRegistro(state, payload) {
+        console.log('setRegistro')
+        state.registro = payload;
+        sessionStorage.setItem('registro', JSON.stringify(payload));
+    }
 }
 
 export default {

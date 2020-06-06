@@ -16,15 +16,16 @@
                         <div class="form-group col-xl-6">
                             <label class="control-label">Nome</label>
                             <input class="form-control" maxlength="255" name="nome" placeholder="Nome do cidade"
-                                   required v-model="formResource.nome"
+                                   required v-model="resource.nome"
                                    type="text" value="">
                         </div>
                         <div class="form-group col-xl-6">
                             <label class="control-label">Código Município</label>
                             <input class="form-control" name="municipio_codigo" placeholder="Código de Município"
-                                   required type="text" value="" v-model="formResource.municipio_codigo">
+                                   required type="text" value="" v-model="resource.municipio_codigo">
                         </div>
                     </form>
+                    {{resource}}
                 </div>
 
                 <div class="tile-footer text-center">
@@ -45,49 +46,23 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
         name: "CidadeFormComponent",
         props: ['id'],
         computed: {
-            formResource: {
-                get() {
-                    return this.$store.state.forms.formResource;
-                },
-                set(value) {
-                    this.$store.commit('forms/setFormResource', value)
-                },
-            }
+            /*resource(){
+                return this.$store.getters('forms/getRegistro')
+            },*/
+            ...mapGetters({
+                resource: 'forms/getRegistro',
+            })
         },
-        data() {
-            return {}
+        mounted() {
+            console.log(this.id)
         },
-        methods: {
-            saveData() {
-                this.$store.dispatch('forms/putResource')
-            },
-            deleteData() {
-                this.$store.dispatch('forms/deleteResource', this.formResource)
-            },
-            getData() {
-                this.resource = this.formData
-            },
-            clearForm() {
-                this.resource.nome = '';
-                this.resource.municipio_codigo = '';
-            },
-        },
-        /*mounted() {
-            this.clearForm()
-            if (this.$route.params.id) {
-                this.getData();
-            }
-        },
-        updated() {
-            this.clearForm();
-            if (this.$route.params.id) {
-                this.getData();
-            }
-        }*/
+
     }
 </script>
 
