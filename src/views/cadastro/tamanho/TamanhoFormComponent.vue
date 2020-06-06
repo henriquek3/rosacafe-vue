@@ -1,7 +1,6 @@
 <template>
-    <!--add campo busto, cintura e quadril-->
-    <div class="row">
-        <div class="col-xl-12">
+    <div class="row"><!--add campo busto, cintura e quadril-->
+        <div class="col-md-12">
             <div class="tile">
                 <div class="tile-title-w-btn line-head">
                     <template v-if="id">
@@ -14,13 +13,13 @@
                 </div>
                 <div class="tile-body">
                     <form action="" class="row" id="formResource" method="post">
-                        <div class="form-group col-xl-6">
+                        <div class="form-group col-md-6">
                             <label class="control-label">Nome</label>
                             <input class="form-control" maxlength="255" name="nome" placeholder="Nome do tamanho"
                                    required
                                    type="text" value="">
                         </div>
-                        <div class="form-group col-xl-6">
+                        <div class="form-group col-md-6">
                             <label class="control-label">Apelido</label>
                             <input class="form-control" maxlength="10" name="apelido" placeholder="Apelido do Tamanho"
                                    required

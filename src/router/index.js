@@ -40,31 +40,6 @@ const routes = [
         meta: {auth: true},
         children: [
             {
-                path: 'tamanho',
-                component: TamanhoPage,
-                props: true,
-                meta: {auth: true},
-                children: [
-                    {
-                        path: '',
-                        props: true,
-                        component: TamanhoTableComponent,
-                        meta: {auth: true},
-                    },
-                    {
-                        path: 'novo',
-                        component: TamanhoFormComponent,
-                        meta: {auth: true},
-                    },
-                    {
-                        path: ':id',
-                        props: true,
-                        component: TamanhoFormComponent,
-                        meta: {auth: true},
-                    },
-                ]
-            },
-            {
                 path: 'cidade',
                 component: CidadePage,
                 props: true,
@@ -86,6 +61,32 @@ const routes = [
                         path: ':id',
                         props: true,
                         component: CidadeFormComponent,
+                        meta: {auth: true},
+                    },
+                ]
+            },
+            {
+                path: 'tamanho',
+                component: TamanhoPage,
+                props: true,
+                meta: {auth: true},
+                children: [
+                    {
+                        path: '',
+                        props: true,
+                        name: 'tamanho',
+                        component: TamanhoTableComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: 'novo',
+                        component: TamanhoFormComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: ':id',
+                        props: true,
+                        component: TamanhoFormComponent,
                         meta: {auth: true},
                     },
                 ]

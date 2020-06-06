@@ -1,22 +1,18 @@
-
 // const state = {}
 // const getters = {}
 const actions = {
-    initDatatables(context,payload){
+    initDatatables(context, payload) {
+        payload.columns.push({
+            defaultContent: `<button class='btn btn-sm btn-primary ripple'><i class='fas fa-pen mr-0'></i></button>`,
+            className: 'text-center',
+        })
+
         window.$(payload.table).DataTable({
             processing: true,
             serverSide: true,
             ajax: payload.datatableAjaxUrl,
             order: [0, 'asc'],
-            columns: [
-                {data: 'id', name: 'id', defaultContent: '--'},
-                {data: 'nome', name: 'nome', defaultContent: '--', className: 'text-capitalize'},
-                {data: 'estado.nome', name: 'estado.nome', className: 'text-center', defaultContent: '--'},
-                {
-                    defaultContent: `<button class='btn btn-sm btn-primary ripple'><i class='fas fa-pen mr-0'></i></button>`,
-                    className: 'text-center',
-                }
-            ],
+            columns: payload.columns,
             language: {
                 "sEmptyTable": "Nenhum registro encontrado",
                 "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
