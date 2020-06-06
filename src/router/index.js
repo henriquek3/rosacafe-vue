@@ -11,6 +11,9 @@ import LoginPage from "../views/auth/LoginPage";
 import CidadePage from "../views/cadastro/cidade/CidadePage";
 import CidadeTableComponent from "../views/cadastro/cidade/CidadeTableComponent";
 import CidadeFormComponent from "../views/cadastro/cidade/CidadeFormComponent";
+import CorPage from "../views/cadastro/cor/CorPage";
+import CorTableComponent from "../views/cadastro/cor/CorTableComponent";
+import CorFormComponent from "../views/cadastro/cor/CorFormComponent";
 
 Vue.use(VueRouter)
 
@@ -87,6 +90,31 @@ const routes = [
                         path: ':id',
                         props: true,
                         component: TamanhoFormComponent,
+                        meta: {auth: true},
+                    },
+                ]
+            }, {
+                path: 'cor',
+                component: CorPage,
+                props: true,
+                meta: {auth: true},
+                children: [
+                    {
+                        path: '',
+                        props: true,
+                        name: 'cor',
+                        component: CorTableComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: 'novo',
+                        component: CorFormComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: ':id',
+                        props: true,
+                        component: CorFormComponent,
                         meta: {auth: true},
                     },
                 ]
