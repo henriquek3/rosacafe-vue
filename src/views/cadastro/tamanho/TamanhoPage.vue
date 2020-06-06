@@ -11,10 +11,7 @@
                 <li class="breadcrumb-item"><a href="#">Ver Todos</a></li>
             </ul>
         </div>
-        <transition enter-active-class="animate__animated animate__zoomIn animate__faster"
-                    leave-active-class="animate__animated animate__zoomIn animate__faster" mode="out-in">
-            <router-view/>
-        </transition>
+        <router-view/>
     </main>
 </template>
 

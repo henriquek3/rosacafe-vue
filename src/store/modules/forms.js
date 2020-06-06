@@ -3,7 +3,8 @@ import router from "../../router";
 // initial state
 const state = {
     registro: {},
-    url: ''
+    url: '',
+    callbackUrl: '',
 }
 
 // getters
@@ -17,8 +18,42 @@ const getters = {
 const actions = {
     loadResource({commit}, payload) {
         commit('setRegistro', payload);
-        sessionStorage.setItem('registro', JSON.stringify(payload))
         router.push(`${payload.path}/${payload.id}`);
+    },
+    requestCreate({commit, state}, payload) {
+        return this._vm.$http.post(`${state.url}`, payload)
+            .then((response) => {
+                commit('setRegistro', payload);
+                console.log(response)
+                router.push(`${state.callbackUrl}/${response.data.id}`);
+            }).then(() => {
+                window.iziToast.show({
+                    title: 'Sucesso!',
+                    message: 'O registro foi atualizado com sucesso!',
+                    color: 'green',
+                    position: 'topCenter',
+                });
+
+            })
+            .catch(err => {
+                console.log(err.message)
+                window.iziToast.show({
+                    title: 'Atenção!',
+                    message: 'Houve um problema para processar sua requisição!',
+                    color: 'red',
+                    position: 'topCenter',
+                    timeout: 10000,
+                });
+
+                // Messagem de ambiente de desenvolvimetno
+                window.iziToast.show({
+                    title: `Código: ${err.code}`,
+                    message: `Mensagem: ${err.message}`,
+                    color: 'red',
+                    position: 'bottomCenter',
+                    timeout: 20000
+                });
+            });
     },
     requestPut({commit, state}) {
         return this._vm.$http.put(`${state.url}/${state.registro.id}`, state.registro)
@@ -31,15 +66,25 @@ const actions = {
                     color: 'green',
                     position: 'topCenter',
                 });
+
             })
             .catch(err => {
-                console.log(err)
+                console.log(err.message)
                 window.iziToast.show({
                     title: 'Atenção!',
                     message: 'Houve um problema para processar sua requisição!',
                     color: 'red',
                     position: 'topCenter',
                     timeout: 10000,
+                });
+
+                // Messagem de ambiente de desenvolvimetno
+                window.iziToast.show({
+                    title: `Código: ${err.code}`,
+                    message: `Mensagem: ${err.message}`,
+                    color: 'red',
+                    position: 'bottomCenter',
+                    timeout: 20000
                 });
             });
     },
@@ -58,13 +103,22 @@ const actions = {
                 });
             })
             .catch(err => {
-                console.log(err)
+                console.log(err.message)
                 window.iziToast.show({
                     title: 'Atenção!',
                     message: 'Houve um problema para processar sua requisição!',
                     color: 'red',
                     position: 'topCenter',
                     timeout: 10000,
+                });
+
+                // Messagem de ambiente de desenvolvimetno
+                window.iziToast.show({
+                    title: `Código: ${err.code}`,
+                    message: `Mensagem: ${err.message}`,
+                    color: 'red',
+                    position: 'bottomCenter',
+                    timeout: 20000
                 });
             });
     },
@@ -76,12 +130,16 @@ const actions = {
     },
     setUrl({commit}, payload) {
         commit('setUrl', payload);
-    }
+    },
+    setCallbackUrl({commit}, payload) {
+        commit('setCallbackUrl', payload);
+    },
 }
 
 // mutations
 const mutations = {
     setRegistro(state, payload) {
+        sessionStorage.setItem('registro', JSON.stringify(payload))
         state.registro = payload;
     },
     setNullRegistro(state) {
@@ -89,7 +147,10 @@ const mutations = {
     },
     setUrl(state, payload) {
         state.url = payload;
-    }
+    },
+    setCallbackUrl(state, payload) {
+        state.callbackUrl = payload;
+    },
 }
 
 export default {
