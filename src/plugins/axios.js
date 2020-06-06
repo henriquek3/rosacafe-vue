@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
+import store from '../store'
 import {appUrl} from '../../.env';
 
 Vue.use({
@@ -17,7 +18,7 @@ Vue.use({
         Vue.prototype.$http.interceptors.request.use(request => {
             const token = sessionStorage.getItem('token');
             if (!token) {
-                Vue.prototype.$store.commit('login/unauthenticated');
+                store.commit('login/unauthenticated');
                 return Vue.prototype.$router.push({name: 'auth.login'});
             }
             const accessToken = JSON.parse(token).access_token;
@@ -27,7 +28,7 @@ Vue.use({
 
         Vue.prototype.$http.interceptors.response.use(response => {
             if (response.status === 0 || response.status === 401) {
-                Vue.prototype.$store.commit('unauthenticated');
+                store.commit('unauthenticated');
                 Vue.prototype.$router.push({name: 'auth.login'});
             }
             return response;

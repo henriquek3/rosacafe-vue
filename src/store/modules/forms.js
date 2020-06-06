@@ -1,30 +1,29 @@
-import Vue from 'vue'
 import router from "../../router";
 
 // initial state
 const state = {
-    registro: {}
+    registro: {},
+    url: ''
 }
 
 // getters
 const getters = {
-    getRegistro: () => {
-        console.log('getRegistros')
-        return JSON.parse(sessionStorage.getItem('registro'));
+    getRegistro: state => {
+        return state.registro;
     },
 }
 
 // actions
 const actions = {
     loadResource({commit}, payload) {
-        console.log('loadResource')
         commit('setRegistro', payload);
+        sessionStorage.setItem('registro', JSON.stringify(payload))
         router.push(`${payload.path}/${payload.id}`);
     },
     requestPut({commit, state}) {
-        return Vue.prototype.$http.put(`/${state.formResource.resource}/${state.formResource.id}`, state.formResource)
+        return this._vm.$http.put(`${state.url}/${state.registro.id}`, state.registro)
             .then(() => {
-                commit('setFormResource', state.formResource);
+                commit('setRegistro', state.registro);
             }).then(() => {
                 window.iziToast.show({
                     title: 'Sucesso!',
@@ -44,11 +43,11 @@ const actions = {
                 });
             });
     },
-    requestDelete({commit}, data) {
-        return Vue.prototype.$http.delete(`/${data.resource}/${data.id}`)
+    requestDelete({commit, state}, payload) {
+        return this._vm.$http.delete(`${state.url}/${payload.id}`)
             .then(() => {
-                commit('deleteFormResource');
-                router.push({name: data.resource})
+                router.push(`${payload.path}`)
+                commit('setNullRegistro');
             })
             .then(() => {
                 window.iziToast.show({
@@ -69,14 +68,27 @@ const actions = {
                 });
             });
     },
+    resetRegistro({commit}) {
+        commit('setNullRegistro')
+    },
+    getSessionStorageRegistro() {
+        return JSON.parse(sessionStorage.getItem('registro'))
+    },
+    setUrl({commit}, payload) {
+        commit('setUrl', payload);
+    }
 }
 
 // mutations
 const mutations = {
     setRegistro(state, payload) {
-        console.log('setRegistro')
         state.registro = payload;
-        sessionStorage.setItem('registro', JSON.stringify(payload));
+    },
+    setNullRegistro(state) {
+        state.registro = {}
+    },
+    setUrl(state, payload) {
+        state.url = payload;
     }
 }
 

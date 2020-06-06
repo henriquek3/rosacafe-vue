@@ -27,42 +27,57 @@
                     </form>
                     {{resource}}
                 </div>
-
                 <div class="tile-footer text-center">
                     <button class="btn btn-primary shadow-sm ripple mr-2" form="formulario" type="submit">
                         <i class="fa fa-fw fa-lg fa-check-circle"></i>Salvar
                     </button>
-                    <button class="btn btn-danger shadow-sm ripple mr-2" type="submit" v-if="id" @click="deleteData()">
+                    <button class="btn btn-danger shadow-sm ripple mr-2" type="submit" v-if="id" @click="deleteData(resource)">
                         <i class="fa fa-fw fa-lg fa-minus-circle"></i>Excluir
                     </button>
                     <router-link class="btn btn-secondary shadow-sm ripple" to="/cadastro/cidade">
                         <i class="fa fa-fw fa-lg fa-times-circle"></i>Cancelar
                     </router-link>
                 </div>
-
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import {mapGetters} from "vuex";
+    import {mapActions} from "vuex";
 
     export default {
         name: "CidadeFormComponent",
         props: ['id'],
         computed: {
-            /*resource(){
-                return this.$store.getters('forms/getRegistro')
-            },*/
-            ...mapGetters({
-                resource: 'forms/getRegistro',
-            })
+            resource: {
+                get() {
+                    return this.$store.getters['forms/getRegistro']
+                },
+                set(value) {
+                    this.$store.commit('forms/setRegistro', value)
+                }
+            }
+        },
+        data() {
+            return {
+                urlResource: '/cidade'
+            }
         },
         mounted() {
-            console.log(this.id)
+            this.setUrl(this.urlResource)
+            if (this.id) {
+                this.getResource().then(res => this.resource = res)
+            }
         },
-
+        methods: {
+            ...mapActions({
+                getResource: 'forms/getSessionStorageRegistro',
+                setUrl: 'forms/setUrl',
+                saveData: 'forms/requestPut',
+                deleteData: 'forms/requestDelete',
+            })
+        }
     }
 </script>
 

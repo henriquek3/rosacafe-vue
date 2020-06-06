@@ -51,9 +51,11 @@
         computed: {},
         mounted() {
             this.initDatatable(this)
+            this.resetRegistro()
         },
         methods: {
             ...mapActions({
+                resetRegistro: 'forms/resetRegistro',
                 loadResource: 'forms/loadResource',
                 initDatatable: 'datatables/initDatatables',
             }),
