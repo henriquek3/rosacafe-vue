@@ -71,7 +71,7 @@
 
     export default {
         name: "CorFormComponent",
-        props: ['id', 'required'],
+        props: ['id'],
         computed: {
             resource: {
                 get() {

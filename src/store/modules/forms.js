@@ -24,7 +24,6 @@ const actions = {
         return this._vm.$http.post(`${state.url}`, payload)
             .then((response) => {
                 commit('setRegistro', payload);
-                console.log(response)
                 router.push(`${state.callbackUrl}/${response.data.id}`);
             }).then(() => {
                 window.iziToast.show({

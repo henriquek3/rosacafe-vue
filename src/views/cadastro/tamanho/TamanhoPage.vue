@@ -3,7 +3,7 @@
         <div class="app-title">
             <div>
                 <h1><i class="fas fa-ruler"></i> Cadastro de Tamanhos</h1>
-                <p> Cadastro e edição dos Tamanhos dos produtos</p>
+                <p> Cadastro e edição dos tamanhos dos produtos, comumente chamado de Guia de Medidas</p>
             </div>
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
