@@ -12,6 +12,7 @@
                     <table class="table table-striped" id="table" width="100%">
                         <thead>
                         <tr>
+                            <th style="width:7%">#</th>
                             <th>Código</th>
                             <th>Nome</th>
                             <th style="width:10%">Ação</th>
@@ -34,20 +35,13 @@
     import {mapActions} from "vuex";
 
     export default {
-        name: "CorTableComponent",
+        name: "CicloTableComponent",
         data: function () {
             return {
                 error: false,
-                datatableAjaxUrl: 'http://localhost:8000/api/cor',
+                datatableAjaxUrl: 'http://localhost:8000/api/ciclo',
                 table: '#table',
                 columns: [
-                    {
-                        data: 'codigo', name: 'codigo', defaultContent: '--', className: 'text-white',
-                        render: {},
-                        createdCell: function(td, cellData){
-                            window.$(td).css('backgroundColor', cellData)
-                        },
-                    },
                     {data: 'nome', name: 'nome', defaultContent: '--', className: 'text-capitalize'},
                 ]
             }

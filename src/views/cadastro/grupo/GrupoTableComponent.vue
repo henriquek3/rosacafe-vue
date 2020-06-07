@@ -34,11 +34,11 @@
     import {mapActions} from "vuex";
 
     export default {
-        name: "CorTableComponent",
+        name: "GrupoTableComponent",
         data: function () {
             return {
                 error: false,
-                datatableAjaxUrl: 'http://localhost:8000/api/cor',
+                datatableAjaxUrl: 'http://localhost:8000/api/grupo',
                 table: '#table',
                 columns: [
                     {

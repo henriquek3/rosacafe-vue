@@ -26,7 +26,7 @@
                                     <input class="form-control"
                                            name="nome"
                                            :class="classes"
-                                           placeholder="Nome da Cor"
+                                           placeholder="Nome do Ciclo"
                                            v-model="resource.nome"
                                            type="text"
                                     >
@@ -34,21 +34,6 @@
                                 </ValidationProvider>
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <ValidationProvider name="Código" v-slot="{valid, errors,classes}"
-                                                    rules="required|min:3|max:10">
-                                    <label>Código</label>
-                                    <input class="form-control"
-                                           name="codigo"
-                                           placeholder="Código da Cor"
-                                           v-model="resource.codigo"
-                                           :class="classes"
-                                           type="text"
-                                    >
-                                    <span class="invalid-feedback">{{errors[0]}}</span>
-                                </ValidationProvider>
-
-                            </div>
                         </form>
                     </div>
 
@@ -61,7 +46,7 @@
                                 @click="deleteData(resource)">
                             <i class="fa fa-fw fa-lg fa-minus-circle"></i>Excluir
                         </button>
-                        <router-link class="btn btn-secondary shadow-sm ripple" :to="urlCallback">
+                        <router-link class="btn btn-secondary shadow-sm ripple" to="/cadastro/ciclo">
                             <i class="fa fa-fw fa-lg fa-times-circle"></i>Cancelar
                         </router-link>
                     </div>
@@ -76,7 +61,7 @@
     import {mapActions} from "vuex";
 
     export default {
-        name: "CorFormComponent",
+        name: "CicloFormComponent",
         props: ['id'],
         computed: {
             resource: {
@@ -90,8 +75,8 @@
         },
         data() {
             return {
-                urlApi: '/cor',
-                urlCallback: '/cadastro/cor'
+                urlApi: '/ciclo',
+                urlCallback: '/cadastro/ciclo'
             }
         },
         mounted() {

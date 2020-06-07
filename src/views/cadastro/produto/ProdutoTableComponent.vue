@@ -3,8 +3,8 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="tile-title-w-btn line-head">
-                    <h3 class="title">Cores</h3>
-                    <router-link class="btn btn-primary btn-sm ripple" to="/cadastro/cor/novo">
+                    <h3 class="title">Produtos</h3>
+                    <router-link class="btn btn-primary btn-sm ripple" to="/cadastro/produto/novo">
                         <i class="fa fa-plus mr-0"></i>
                     </router-link>
                 </div>
@@ -13,6 +13,7 @@
                         <thead>
                         <tr>
                             <th>Código</th>
+                            <th>Grupo</th>
                             <th>Nome</th>
                             <th style="width:10%">Ação</th>
                         </tr>
@@ -34,20 +35,15 @@
     import {mapActions} from "vuex";
 
     export default {
-        name: "CorTableComponent",
+        name: "ProdutoTableComponent",
         data: function () {
             return {
                 error: false,
-                datatableAjaxUrl: 'http://localhost:8000/api/cor',
+                datatableAjaxUrl: 'http://localhost:8000/api/produto?with=grupo',
                 table: '#table',
                 columns: [
-                    {
-                        data: 'codigo', name: 'codigo', defaultContent: '--', className: 'text-white',
-                        render: {},
-                        createdCell: function(td, cellData){
-                            window.$(td).css('backgroundColor', cellData)
-                        },
-                    },
+                    {data: 'codigo', name: 'codigo', defaultContent: '--', className: 'text-white'},
+                    {data: 'grupo.nome', name: 'grupo', defaultContent: '--', className: 'text-capitalize'},
                     {data: 'nome', name: 'nome', defaultContent: '--', className: 'text-capitalize'},
                 ]
             }

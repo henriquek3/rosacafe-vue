@@ -6,12 +6,12 @@
 
                     <div class="tile-title-w-btn line-head">
                         <template v-if="id">
-                            <h3 class="title">Editar Cor</h3>
+                            <h3 class="title">Editar Marca</h3>
                             <button class="btn btn-primary btn-sm shadow-sm ripple" @click="newResource()">
                                 <i class="fa fa-plus mr-0"></i>
                             </button>
                         </template>
-                        <h3 class="title" v-else>Nova Cor</h3>
+                        <h3 class="title" v-else>Nova Marca</h3>
                     </div>
 
                     <div class="tile-body">
@@ -26,7 +26,7 @@
                                     <input class="form-control"
                                            name="nome"
                                            :class="classes"
-                                           placeholder="Nome da Cor"
+                                           placeholder="Nome da Marca"
                                            v-model="resource.nome"
                                            type="text"
                                     >
@@ -34,20 +34,21 @@
                                 </ValidationProvider>
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <ValidationProvider name="Código" v-slot="{valid, errors,classes}"
-                                                    rules="required|min:3|max:10">
-                                    <label>Código</label>
-                                    <input class="form-control"
-                                           name="codigo"
-                                           placeholder="Código da Cor"
-                                           v-model="resource.codigo"
-                                           :class="classes"
-                                           type="text"
-                                    >
-                                    <span class="invalid-feedback">{{errors[0]}}</span>
-                                </ValidationProvider>
-
+                            <div class="form-group col-xl-6">
+                                <div class="row">
+                                    <div class="col-xl-8">
+                                        <label class="control-label">Imagem</label>
+                                        <input class="form-control-file" type="file" name="image" id="file"
+                                               accept="image/*" @change="onFileSelected">
+                                    </div>
+                                    <div class="col-xl-4" title="Imagem da Marca">
+                                        <a :href="`/storage/marca/${resource.image}`" target="_blank">
+                                            <img class="img-thumbnail"
+                                                 :href="`/storage/marca/${resource.image}`"
+                                                 alt="Imagem da Campanha" style="max-height: 100px;">
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -76,7 +77,7 @@
     import {mapActions} from "vuex";
 
     export default {
-        name: "CorFormComponent",
+        name: "MarcaFormComponent",
         props: ['id'],
         computed: {
             resource: {
@@ -90,8 +91,9 @@
         },
         data() {
             return {
-                urlApi: '/cor',
-                urlCallback: '/cadastro/cor'
+                urlApi: '/marca',
+                urlCallback: '/cadastro/marca',
+                selectedFile: null
             }
         },
         mounted() {
@@ -112,6 +114,9 @@
             newResource() {
                 this.resetRegistro()
                 this.$router.push(`${this.urlCallback}/novo`)
+            },
+            onFileSelected(event) {
+                this.selectedFile = event.target.files[0]
             },
             ...mapActions({
                 getResource: 'forms/getSessionStorageRegistro',

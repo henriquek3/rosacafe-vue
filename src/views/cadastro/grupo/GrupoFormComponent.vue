@@ -6,12 +6,12 @@
 
                     <div class="tile-title-w-btn line-head">
                         <template v-if="id">
-                            <h3 class="title">Editar Cor</h3>
+                            <h3 class="title">Editar Grupo</h3>
                             <button class="btn btn-primary btn-sm shadow-sm ripple" @click="newResource()">
                                 <i class="fa fa-plus mr-0"></i>
                             </button>
                         </template>
-                        <h3 class="title" v-else>Nova Cor</h3>
+                        <h3 class="title" v-else>Novo Grupo</h3>
                     </div>
 
                     <div class="tile-body">
@@ -26,7 +26,7 @@
                                     <input class="form-control"
                                            name="nome"
                                            :class="classes"
-                                           placeholder="Nome da Cor"
+                                           placeholder="Nome do Grupo"
                                            v-model="resource.nome"
                                            type="text"
                                     >
@@ -34,21 +34,6 @@
                                 </ValidationProvider>
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <ValidationProvider name="Código" v-slot="{valid, errors,classes}"
-                                                    rules="required|min:3|max:10">
-                                    <label>Código</label>
-                                    <input class="form-control"
-                                           name="codigo"
-                                           placeholder="Código da Cor"
-                                           v-model="resource.codigo"
-                                           :class="classes"
-                                           type="text"
-                                    >
-                                    <span class="invalid-feedback">{{errors[0]}}</span>
-                                </ValidationProvider>
-
-                            </div>
                         </form>
                     </div>
 
@@ -76,7 +61,7 @@
     import {mapActions} from "vuex";
 
     export default {
-        name: "CorFormComponent",
+        name: "GrupoFormComponent",
         props: ['id'],
         computed: {
             resource: {
@@ -90,8 +75,8 @@
         },
         data() {
             return {
-                urlApi: '/cor',
-                urlCallback: '/cadastro/cor'
+                urlApi: '/grupo',
+                urlCallback: '/cadastro/grupo'
             }
         },
         mounted() {

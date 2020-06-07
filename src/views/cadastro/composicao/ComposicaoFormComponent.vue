@@ -6,12 +6,12 @@
 
                     <div class="tile-title-w-btn line-head">
                         <template v-if="id">
-                            <h3 class="title">Editar Cor</h3>
+                            <h3 class="title">Editar Composição</h3>
                             <button class="btn btn-primary btn-sm shadow-sm ripple" @click="newResource()">
                                 <i class="fa fa-plus mr-0"></i>
                             </button>
                         </template>
-                        <h3 class="title" v-else>Nova Cor</h3>
+                        <h3 class="title" v-else>Nova Composição</h3>
                     </div>
 
                     <div class="tile-body">
@@ -22,33 +22,16 @@
                             <div class="form-group col-md-6">
                                 <ValidationProvider name="Nome" v-slot="{valid, errors,classes}"
                                                     rules="required|min:4|alpha_spaces|max:100">
-                                    <label>Nome</label>
-                                    <input class="form-control"
-                                           name="nome"
+                                    <label class="control-label">Nome</label>
+                                    <input class="form-control" maxlength="255" name="nome"
                                            :class="classes"
-                                           placeholder="Nome da Cor"
-                                           v-model="resource.nome"
-                                           type="text"
-                                    >
+                                           placeholder="Nome da Composição"
+                                           required v-model="resource.nome"
+                                           type="text" value="">
                                     <span class="invalid-feedback">{{errors[0]}}</span>
                                 </ValidationProvider>
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <ValidationProvider name="Código" v-slot="{valid, errors,classes}"
-                                                    rules="required|min:3|max:10">
-                                    <label>Código</label>
-                                    <input class="form-control"
-                                           name="codigo"
-                                           placeholder="Código da Cor"
-                                           v-model="resource.codigo"
-                                           :class="classes"
-                                           type="text"
-                                    >
-                                    <span class="invalid-feedback">{{errors[0]}}</span>
-                                </ValidationProvider>
-
-                            </div>
                         </form>
                     </div>
 
@@ -76,7 +59,7 @@
     import {mapActions} from "vuex";
 
     export default {
-        name: "CorFormComponent",
+        name: "ComposicaoFormComponent",
         props: ['id'],
         computed: {
             resource: {
@@ -90,8 +73,8 @@
         },
         data() {
             return {
-                urlApi: '/cor',
-                urlCallback: '/cadastro/cor'
+                urlApi: '/composicao',
+                urlCallback: '/cadastro/composicao'
             }
         },
         mounted() {

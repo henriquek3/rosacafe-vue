@@ -1,40 +1,30 @@
 <template>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="tile">
-                <div class="tile-title-w-btn line-head">
-                    <h3 class="title">Cores</h3>
-                    <router-link class="btn btn-primary btn-sm ripple" to="/cadastro/cor/novo">
-                        <i class="fa fa-plus mr-0"></i>
-                    </router-link>
-                </div>
-                <div class="tile-body">
-                    <table class="table table-striped" id="table" width="100%">
-                        <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Nome</th>
-                            <th style="width:10%">Ação</th>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <td colspan="4">&nbsp;</td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <div class="tile-footer"></div>
+    <main class="app-content">
+        <div class="app-title">
+            <div>
+                <h1><i class="fas fa-fill-drip"></i> Cadastro de Cores</h1>
+                <p> Cadastro e edição das Cores dos produtos</p>
             </div>
+            <ul class="app-breadcrumb breadcrumb">
+                <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                <li class="breadcrumb-item">Cadastro</li>
+                <li class="breadcrumb-item">
+                    <router-link to="/cadastro/cor">Cores</router-link>
+                </li>
+            </ul>
         </div>
-    </div>
+        <transition enter-active-class="animate__animated animate__zoomIn animate__faster"
+                    leave-active-class="animate__animated animate__zoomOut animate__faster" mode="out-in">
+            <router-view/>
+        </transition>
+    </main>
 </template>
 
 <script>
     import {mapActions} from "vuex";
 
     export default {
-        name: "CorTableComponent",
+        name: "MarcaPage",
         data: function () {
             return {
                 error: false,

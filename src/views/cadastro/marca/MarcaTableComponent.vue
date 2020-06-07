@@ -4,7 +4,7 @@
             <div class="tile">
                 <div class="tile-title-w-btn line-head">
                     <h3 class="title">Cores</h3>
-                    <router-link class="btn btn-primary btn-sm ripple" to="/cadastro/cor/novo">
+                    <router-link class="btn btn-primary btn-sm ripple" to="/cadastro/marca/novo">
                         <i class="fa fa-plus mr-0"></i>
                     </router-link>
                 </div>
@@ -34,18 +34,18 @@
     import {mapActions} from "vuex";
 
     export default {
-        name: "CorTableComponent",
+        name: "MarcaTableComponent",
         data: function () {
             return {
                 error: false,
-                datatableAjaxUrl: 'http://localhost:8000/api/cor',
+                datatableAjaxUrl: 'http://localhost:8000/api/marca',
                 table: '#table',
                 columns: [
                     {
-                        data: 'codigo', name: 'codigo', defaultContent: '--', className: 'text-white',
+                        data: 'image', name: 'image', defaultContent: '--', className: 'text-white',
                         render: {},
                         createdCell: function(td, cellData){
-                            window.$(td).css('backgroundColor', cellData)
+                            //window.$(td).css('backgroundColor', cellData)
                         },
                     },
                     {data: 'nome', name: 'nome', defaultContent: '--', className: 'text-capitalize'},
