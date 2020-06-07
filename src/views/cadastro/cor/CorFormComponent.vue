@@ -1,5 +1,5 @@
 <template>
-    <div class="row"><!--add campo busto, cintura e quadril-->
+    <div class="row">
         <div class="col-md-12">
             <ValidationObserver v-slot="{invalid}">
                 <div class="tile">
@@ -84,7 +84,6 @@
         },
         data() {
             return {
-                email: '',
                 urlApi: '/cor',
                 urlCallback: '/cadastro/cor'
             }

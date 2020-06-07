@@ -14,6 +14,9 @@ import CidadeFormComponent from "../views/cadastro/cidade/CidadeFormComponent";
 import CorPage from "../views/cadastro/cor/CorPage";
 import CorTableComponent from "../views/cadastro/cor/CorTableComponent";
 import CorFormComponent from "../views/cadastro/cor/CorFormComponent";
+import CampanhaPage from "../views/cadastro/campanha/CampanhaPage";
+import CampanhaTableComponent from "../views/cadastro/campanha/CampanhaTableComponent";
+import CampanhaFormComponent from "../views/cadastro/campanha/CampanhaFormComponent";
 
 Vue.use(VueRouter)
 
@@ -93,8 +96,165 @@ const routes = [
                         meta: {auth: true},
                     },
                 ]
-            }, {
+            },
+            {
                 path: 'cor',
+                component: CorPage,
+                props: true,
+                meta: {auth: true},
+                children: [
+                    {
+                        path: '',
+                        props: true,
+                        name: 'cor',
+                        component: CorTableComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: 'novo',
+                        component: CorFormComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: ':id',
+                        props: true,
+                        component: CorFormComponent,
+                        meta: {auth: true},
+                    },
+                ]
+            },
+            {
+                path: 'grupo',
+                component: CorPage,
+                props: true,
+                meta: {auth: true},
+                children: [
+                    {
+                        path: '',
+                        props: true,
+                        name: 'cor',
+                        component: CorTableComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: 'novo',
+                        component: CorFormComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: ':id',
+                        props: true,
+                        component: CorFormComponent,
+                        meta: {auth: true},
+                    },
+                ]
+            },
+            {
+                path: 'campanha',
+                component: CampanhaPage,
+                props: true,
+                meta: {auth: true},
+                children: [
+                    {
+                        path: '',
+                        props: true,
+                        name: 'campanha',
+                        component: CampanhaTableComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: 'novo',
+                        component: CampanhaFormComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: ':id',
+                        props: true,
+                        component: CampanhaFormComponent,
+                        meta: {auth: true},
+                    },
+                ]
+            },
+            {
+                path: 'ciclo',
+                component: CorPage,
+                props: true,
+                meta: {auth: true},
+                children: [
+                    {
+                        path: '',
+                        props: true,
+                        name: 'cor',
+                        component: CorTableComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: 'novo',
+                        component: CorFormComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: ':id',
+                        props: true,
+                        component: CorFormComponent,
+                        meta: {auth: true},
+                    },
+                ]
+            },
+            {
+                path: 'composicao',
+                component: CorPage,
+                props: true,
+                meta: {auth: true},
+                children: [
+                    {
+                        path: '',
+                        props: true,
+                        name: 'cor',
+                        component: CorTableComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: 'novo',
+                        component: CorFormComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: ':id',
+                        props: true,
+                        component: CorFormComponent,
+                        meta: {auth: true},
+                    },
+                ]
+            },
+            {
+                path: 'marca',
+                component: CorPage,
+                props: true,
+                meta: {auth: true},
+                children: [
+                    {
+                        path: '',
+                        props: true,
+                        name: 'cor',
+                        component: CorTableComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: 'novo',
+                        component: CorFormComponent,
+                        meta: {auth: true},
+                    },
+                    {
+                        path: ':id',
+                        props: true,
+                        component: CorFormComponent,
+                        meta: {auth: true},
+                    },
+                ]
+            },
+            {
+                path: 'produto',
                 component: CorPage,
                 props: true,
                 meta: {auth: true},
