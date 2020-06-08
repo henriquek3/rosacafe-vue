@@ -46,6 +46,7 @@
                         render: {},
                         createdCell: function(td, cellData){
                             //window.$(td).css('backgroundColor', cellData)
+                            console.log(td, cellData)
                         },
                     },
                     {data: 'nome', name: 'nome', defaultContent: '--', className: 'text-capitalize'},

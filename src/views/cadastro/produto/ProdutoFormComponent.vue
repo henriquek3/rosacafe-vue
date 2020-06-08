@@ -225,6 +225,21 @@
                     this.$store.commit('forms/setRegistro', value)
                 }
             },
+        },
+        data() {
+            return {
+                urlApi: '/produto',
+                urlCallback: '/cadastro/produto'
+            }
+        },
+        mounted() {
+            this.setUrl(this.urlApi)
+            this.setCallbackUrl(this.urlCallback)
+            if (this.id) {
+                this.getResource().then(res => this.resource = res)
+            }
+        },
+        methods: {
             marca() {
                 return this.$http.get('/marca').then(response => {
                     return response.data
@@ -260,21 +275,6 @@
                     return response.data
                 })
             },
-        },
-        data() {
-            return {
-                urlApi: '/produto',
-                urlCallback: '/cadastro/produto'
-            }
-        },
-        mounted() {
-            this.setUrl(this.urlApi)
-            this.setCallbackUrl(this.urlCallback)
-            if (this.id) {
-                this.getResource().then(res => this.resource = res)
-            }
-        },
-        methods: {
             saveData(payload) {
                 if (this.id) {
                     this.requestPut(payload);

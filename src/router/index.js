@@ -17,6 +17,21 @@ import CorFormComponent from "../views/cadastro/cor/CorFormComponent";
 import CampanhaPage from "../views/cadastro/campanha/CampanhaPage";
 import CampanhaTableComponent from "../views/cadastro/campanha/CampanhaTableComponent";
 import CampanhaFormComponent from "../views/cadastro/campanha/CampanhaFormComponent";
+import ComposicaoPage from "../views/cadastro/composicao/ComposicaoPage";
+import ComposicaoTableComponent from "../views/cadastro/composicao/ComposicaoTableComponent";
+import ComposicaoFormComponent from "../views/cadastro/composicao/ComposicaoFormComponent";
+import MarcaTableComponent from "../views/cadastro/marca/MarcaTableComponent";
+import MarcaFormComponent from "../views/cadastro/marca/MarcaFormComponent";
+import ProdutoPage from "../views/cadastro/produto/ProdutoPage";
+import ProdutoTableComponent from "../views/cadastro/produto/ProdutoTableComponent";
+import ProdutoFormComponent from "../views/cadastro/produto/ProdutoFormComponent";
+import CicloPage from "../views/cadastro/ciclo/CicloPage";
+import CicloTableComponent from "../views/cadastro/ciclo/CicloTableComponent";
+import CicloFormComponent from "../views/cadastro/ciclo/CicloFormComponent";
+import GrupoPage from "../views/cadastro/grupo/GrupoPage";
+import GrupoTableComponent from "../views/cadastro/grupo/GrupoTableComponent";
+import GrupoFormComponent from "../views/cadastro/grupo/GrupoFormComponent";
+import MarcaPage from "../views/cadastro/marca/MarcaPage";
 
 Vue.use(VueRouter)
 
@@ -125,26 +140,26 @@ const routes = [
             },
             {
                 path: 'grupo',
-                component: CorPage,
+                component: GrupoPage,
                 props: true,
                 meta: {auth: true},
                 children: [
                     {
                         path: '',
                         props: true,
-                        name: 'cor',
-                        component: CorTableComponent,
+                        name: 'grupo',
+                        component: GrupoTableComponent,
                         meta: {auth: true},
                     },
                     {
                         path: 'novo',
-                        component: CorFormComponent,
+                        component: GrupoFormComponent,
                         meta: {auth: true},
                     },
                     {
                         path: ':id',
                         props: true,
-                        component: CorFormComponent,
+                        component: GrupoFormComponent,
                         meta: {auth: true},
                     },
                 ]
@@ -177,104 +192,104 @@ const routes = [
             },
             {
                 path: 'ciclo',
-                component: CorPage,
+                component: CicloPage,
                 props: true,
                 meta: {auth: true},
                 children: [
                     {
                         path: '',
                         props: true,
-                        name: 'cor',
-                        component: CorTableComponent,
+                        name: 'ciclo',
+                        component: CicloTableComponent,
                         meta: {auth: true},
                     },
                     {
                         path: 'novo',
-                        component: CorFormComponent,
+                        component: CicloFormComponent,
                         meta: {auth: true},
                     },
                     {
                         path: ':id',
                         props: true,
-                        component: CorFormComponent,
+                        component: CicloFormComponent,
                         meta: {auth: true},
                     },
                 ]
             },
             {
                 path: 'composicao',
-                component: CorPage,
+                component: ComposicaoPage,
                 props: true,
                 meta: {auth: true},
                 children: [
                     {
                         path: '',
                         props: true,
-                        name: 'cor',
-                        component: CorTableComponent,
+                        name: 'composicao',
+                        component: ComposicaoTableComponent,
                         meta: {auth: true},
                     },
                     {
                         path: 'novo',
-                        component: CorFormComponent,
+                        component: ComposicaoFormComponent,
                         meta: {auth: true},
                     },
                     {
                         path: ':id',
                         props: true,
-                        component: CorFormComponent,
+                        component: ComposicaoFormComponent,
                         meta: {auth: true},
                     },
                 ]
             },
             {
                 path: 'marca',
-                component: CorPage,
+                component: MarcaPage,
                 props: true,
                 meta: {auth: true},
                 children: [
                     {
                         path: '',
                         props: true,
-                        name: 'cor',
-                        component: CorTableComponent,
+                        name: 'marca',
+                        component: MarcaTableComponent,
                         meta: {auth: true},
                     },
                     {
                         path: 'novo',
-                        component: CorFormComponent,
+                        component: MarcaFormComponent,
                         meta: {auth: true},
                     },
                     {
                         path: ':id',
                         props: true,
-                        component: CorFormComponent,
+                        component: MarcaFormComponent,
                         meta: {auth: true},
                     },
                 ]
             },
             {
                 path: 'produto',
-                component: CorPage,
+                component: ProdutoPage,
                 props: true,
                 meta: {auth: true},
                 children: [
                     {
                         path: '',
                         props: true,
-                        name: 'cor',
-                        component: CorTableComponent,
+                        name: 'produto',
+                        component: ProdutoTableComponent,
                         meta: {auth: true},
                     },
                     {
                         path: 'novo',
-                        component: CorFormComponent,
+                        component: ProdutoFormComponent,
                         meta: {auth: true},
                     },
                     {
                         path: ':id',
                         props: true,
-                        component: CorFormComponent,
+                        component: ProdutoFormComponent,
                         meta: {auth: true},
                     },
                 ]
