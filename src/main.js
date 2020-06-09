@@ -17,6 +17,7 @@ require('bootstrap');
 require('pace-js/pace.min')
 require('datatables')
 require('datatables.net-bs4')
+require('select2')
 
 Vue.config.productionTip = false
 

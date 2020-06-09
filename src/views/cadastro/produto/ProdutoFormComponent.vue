@@ -34,7 +34,6 @@
                                 </ValidationProvider>
                             </div>
 
-
                             <div class="form-group col-xl-3">
                                 <ValidationProvider name="Marca" v-slot="{valid, errors,classes}"
                                                     rules="required">
@@ -67,36 +66,49 @@
                                 </ValidationProvider>
                             </div>
 
-                            <div class="form-group col-xl-6">
+                            <div class="form-group col-xl-4">
                                 <ValidationProvider name="Tamanho" v-slot="{valid, errors,classes}"
                                                     rules="required">
                                     <label for="tamanho_id">Tamanho</label>
-                                    <select name="tamanho_id[]"
+                                    <select name="tamanho_id"
                                             id="tamanho_id"
-                                            class="form-control"
-                                            multiple
+                                            class="form-control select2"
                                             :class="classes"
-                                            v-model="resource.tamanho_id"
+                                            v-if="tamanho.length"
+                                            multiple="true"
                                     >
-                                        <option v-for="m in tamanho" :key="m.id" :value="m.id">{{m.nome}}</option>
+                                        <option v-for="t in tamanho" :key="t.id" :value="t.id">
+                                            {{ t.apelido }} - {{t.nome}}
+                                        </option>
                                     </select>
+                                    <div class="form-control text-right" v-else>
+                                        <span class="spinner-border spinner-border-sm text-primary" role="status"
+                                              aria-hidden="true"></span>
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
                                     <span class="invalid-feedback">{{errors[0]}}</span>
                                 </ValidationProvider>
                             </div>
 
-                            <div class="form-group col-xl-6">
+                            <div class="form-group col-xl-4">
                                 <ValidationProvider name="Cor" v-slot="{valid, errors,classes}"
                                                     rules="required">
                                     <label for="cor_id">Cor</label>
-                                    <select name="cor_id[]"
+                                    <select name="cor_id"
                                             id="cor_id"
-                                            class="form-control"
-                                            multiple
+                                            class="form-control select2"
                                             :class="classes"
-                                            v-model="resource.cor_id"
+                                            v-if="cor.length"
                                     >
-                                        <option v-for="m in cor" :key="m.id" :value="m.id">{{m.nome}}</option>
+                                        <option v-for="c in cor" :key="c.id" :value="c.id">
+                                            {{ c.codigo }} - {{c.nome}}
+                                        </option>
                                     </select>
+                                    <div class="form-control text-right" v-else>
+                                        <span class="spinner-border spinner-border-sm text-primary" role="status"
+                                              aria-hidden="true"></span>
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
                                     <span class="invalid-feedback">{{errors[0]}}</span>
                                 </ValidationProvider>
                             </div>
@@ -109,10 +121,16 @@
                                             id="ciclo_id"
                                             class="form-control"
                                             :class="classes"
-                                            v-model="resource.ciclo_id"
+                                            v-model="ciclo_id"
+                                            v-if="ciclo.length"
                                     >
                                         <option v-for="m in ciclo" :key="m.id" :value="m.id">{{m.nome}}</option>
                                     </select>
+                                    <div class="form-control text-right" v-else>
+                                        <span class="spinner-border spinner-border-sm text-primary" role="status"
+                                              aria-hidden="true"></span>
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
                                     <span class="invalid-feedback">{{errors[0]}}</span>
                                 </ValidationProvider>
                             </div>
@@ -125,10 +143,16 @@
                                             id="composicao_id"
                                             class="form-control"
                                             :class="classes"
-                                            v-model="resource.composicao_id"
+                                            v-model="composicao_id"
+                                            v-if="composicao.length"
                                     >
                                         <option v-for="m in composicao" :key="m.id" :value="m.id">{{m.nome}}</option>
                                     </select>
+                                    <div class="form-control text-right" v-else>
+                                        <span class="spinner-border spinner-border-sm text-primary" role="status"
+                                              aria-hidden="true"></span>
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
                                     <span class="invalid-feedback">{{errors[0]}}</span>
                                 </ValidationProvider>
                             </div>
@@ -139,12 +163,18 @@
                                     <label for="campanha_id">Campanha</label>
                                     <select name="campanha_id"
                                             id="campanha_id"
-                                            class="form-control"
+                                            class="form-control select2"
                                             :class="classes"
-                                            v-model="resource.campanha_id"
+                                            v-model="campanha_id"
+                                            v-if="campanha.length"
                                     >
                                         <option v-for="m in campanha" :key="m.id" :value="m.id">{{m.nome}}</option>
                                     </select>
+                                    <div class="form-control text-right" v-else>
+                                        <span class="spinner-border spinner-border-sm text-primary" role="status"
+                                              aria-hidden="true"></span>
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
                                     <span class="invalid-feedback">{{errors[0]}}</span>
                                 </ValidationProvider>
                             </div>
@@ -229,7 +259,22 @@
         data() {
             return {
                 urlApi: '/produto',
-                urlCallback: '/cadastro/produto'
+                urlCallback: '/cadastro/produto',
+                marca: [],
+                grupo: [],
+                tamanho: [],
+                cor: [],
+                ciclo: [],
+                composicao: [],
+                campanha: [],
+
+                marca_id: null,
+                grupo_id: null,
+                tamanho_id: [],
+                cor_id: [],
+                ciclo_id: [],
+                composicao_id: [],
+                campanha_id: [],
             }
         },
         mounted() {
@@ -240,40 +285,47 @@
             }
         },
         methods: {
-            marca() {
+            getMarca() {
                 return this.$http.get('/marca').then(response => {
-                    return response.data
-                })
+                    this.marca = response.data.data;
+                }).catch(err => this.showFormErrors(err))
             },
-            grupo() {
+            getGrupo() {
                 return this.$http.get('/grupo').then(response => {
-                    return response.data
-                })
+                    this.grupo = response.data.data;
+                }).catch(err => this.showFormErrors(err))
             },
-            tamanho() {
+            getTamanho() {
                 return this.$http.get('/tamanho').then(response => {
-                    return response.data
+                    this.tamanho = response.data.data;
                 })
+                    .then(() => {
+                        window.$('.select2').select2()
+                    })
+                    .catch(err => this.showFormErrors(err))
+                    ;
             },
-            cor() {
+            getCor() {
                 return this.$http.get('/cor').then(response => {
-                    return response.data
-                })
+                    this.cor = response.data.data;
+                }).then(() => {
+                    window.$('.select2').select2()
+                }).catch(err => this.showFormErrors(err))
             },
-            ciclo() {
+            getCiclo() {
                 return this.$http.get('/ciclo').then(response => {
-                    return response.data
-                })
+                    this.ciclo = response.data.data;
+                }).catch(err => this.showFormErrors(err))
             },
-            composicao() {
+            getComposicao() {
                 return this.$http.get('/composicao').then(response => {
-                    return response.data
-                })
+                    this.composicao = response.data.data;
+                }).catch(err => this.showFormErrors(err))
             },
-            campanha() {
+            getCampanha() {
                 return this.$http.get('/campanha').then(response => {
-                    return response.data
-                })
+                    this.campanha = response.data.data;
+                }).catch(err => this.showFormErrors(err))
             },
             saveData(payload) {
                 if (this.id) {
@@ -294,7 +346,17 @@
                 requestPut: 'forms/requestPut',
                 deleteData: 'forms/requestDelete',
                 resetRegistro: 'forms/resetRegistro',
+                showFormErrors: 'forms/showFormErrors',
             })
+        },
+        created() {
+            this.getMarca()
+            this.getGrupo()
+            this.getTamanho()
+            this.getCor()
+            this.getCiclo()
+            this.getComposicao()
+            this.getCampanha()
         }
     }
 </script>

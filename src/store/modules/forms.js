@@ -133,6 +133,24 @@ const actions = {
     setCallbackUrl({commit}, payload) {
         commit('setCallbackUrl', payload);
     },
+    showFormErrors(payload){
+        window.iziToast.show({
+            title: 'Atenção!',
+            message: 'Houve um problema para processar sua requisição!',
+            color: 'red',
+            position: 'topCenter',
+            timeout: 10000,
+        });
+
+        // Messagem de ambiente de desenvolvimetno
+        window.iziToast.show({
+            title: `Código: ${payload.code}`,
+            message: `Mensagem: ${payload.message}`,
+            color: 'red',
+            position: 'bottomCenter',
+            timeout: 20000
+        });
+    },
 }
 
 // mutations
