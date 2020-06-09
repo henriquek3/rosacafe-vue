@@ -70,12 +70,13 @@
                                 <ValidationProvider name="Tamanho" v-slot="{valid, errors,classes}"
                                                     rules="required">
                                     <label for="tamanho_id">Tamanho</label>
-                                    <select name="tamanho_id"
+                                    <select name="tamanho_id[]"
                                             id="tamanho_id"
                                             class="form-control select2"
                                             :class="classes"
                                             v-if="tamanho.length"
                                             multiple="true"
+                                            v-model="tamanho_id"
                                     >
                                         <option v-for="t in tamanho" :key="t.id" :value="t.id">
                                             {{ t.apelido }} - {{t.nome}}
@@ -90,7 +91,7 @@
                                 </ValidationProvider>
                             </div>
 
-                            <div class="form-group col-xl-4">
+                            <!--<div class="form-group col-xl-4">
                                 <ValidationProvider name="Cor" v-slot="{valid, errors,classes}"
                                                     rules="required">
                                     <label for="cor_id">Cor</label>
@@ -99,10 +100,9 @@
                                             class="form-control select2"
                                             :class="classes"
                                             v-if="cor.length"
+                                            v-model="cor_id"
                                     >
-                                        <option v-for="c in cor" :key="c.id" :value="c.id">
-                                            {{ c.codigo }} - {{c.nome}}
-                                        </option>
+                                        <option v-for="c in cor" :key="c.id" :value="c.id">{{ c.codigo }} - {{c.nome}}</option>
                                     </select>
                                     <div class="form-control text-right" v-else>
                                         <span class="spinner-border spinner-border-sm text-primary" role="status"
@@ -111,9 +111,9 @@
                                     </div>
                                     <span class="invalid-feedback">{{errors[0]}}</span>
                                 </ValidationProvider>
-                            </div>
+                            </div>-->
 
-                            <div class="form-group col-xl-3">
+                            <!--<div class="form-group col-xl-3">
                                 <ValidationProvider name="Ciclo" v-slot="{valid, errors,classes}"
                                                     rules="required">
                                     <label for="ciclo_id">Ciclo</label>
@@ -133,9 +133,9 @@
                                     </div>
                                     <span class="invalid-feedback">{{errors[0]}}</span>
                                 </ValidationProvider>
-                            </div>
+                            </div>-->
 
-                            <div class="form-group col-xl-3">
+                            <!--<div class="form-group col-xl-3">
                                 <ValidationProvider name="Composição" v-slot="{valid, errors,classes}"
                                                     rules="required">
                                     <label for="composicao_id">Composição</label>
@@ -155,9 +155,9 @@
                                     </div>
                                     <span class="invalid-feedback">{{errors[0]}}</span>
                                 </ValidationProvider>
-                            </div>
+                            </div>-->
 
-                            <div class="form-group col-xl-3">
+                            <!--<div class="form-group col-xl-3">
                                 <ValidationProvider name="Campanha" v-slot="{valid, errors,classes}"
                                                     rules="required">
                                     <label for="campanha_id">Campanha</label>
@@ -177,7 +177,7 @@
                                     </div>
                                     <span class="invalid-feedback">{{errors[0]}}</span>
                                 </ValidationProvider>
-                            </div>
+                            </div>-->
 
                             <div class="form-group col-md-6" data-title="Stock Keeping Unit" data-toggle="tooltip">
                                 <ValidationProvider name="Código" v-slot="{valid, errors,classes}"
@@ -237,6 +237,7 @@
                 </div>
             </ValidationObserver>
         </div>
+        {{tamanho_id}}
     </div>
 </template>
 
@@ -267,14 +268,15 @@
                 ciclo: [],
                 composicao: [],
                 campanha: [],
+                tamanho_id: [],
 
-                marca_id: null,
+                /*marca_id: null,
                 grupo_id: null,
                 tamanho_id: [],
                 cor_id: [],
                 ciclo_id: [],
                 composicao_id: [],
-                campanha_id: [],
+                campanha_id: [],*/
             }
         },
         mounted() {
@@ -301,6 +303,11 @@
                 })
                     .then(() => {
                         window.$('.select2').select2()
+                    }).then(() => {
+                        this.tamanho_id = this.$store.getters['forms/getRegistro'].tamanhos
+                            .map(function (value) {
+                                return value.tamanho_id;
+                            });
                     })
                     .catch(err => this.showFormErrors(err))
                     ;
@@ -328,6 +335,7 @@
                 }).catch(err => this.showFormErrors(err))
             },
             saveData(payload) {
+                this.resource.tamanho_id = this.tamanho_id;
                 if (this.id) {
                     this.requestPut(payload);
                 } else {

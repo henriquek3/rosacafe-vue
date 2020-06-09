@@ -122,7 +122,8 @@ const actions = {
             });
     },
     resetRegistro({commit}) {
-        commit('setNullRegistro')
+        commit('setNullRegistro');
+        sessionStorage.removeItem('registro');
     },
     getSessionStorageRegistro() {
         return JSON.parse(sessionStorage.getItem('registro'))
@@ -133,7 +134,7 @@ const actions = {
     setCallbackUrl({commit}, payload) {
         commit('setCallbackUrl', payload);
     },
-    showFormErrors(payload){
+    showFormErrors(payload) {
         window.iziToast.show({
             title: 'Atenção!',
             message: 'Houve um problema para processar sua requisição!',
