@@ -1,15 +1,11 @@
 {
-  "name": "vue-vali-dashboard",
+  "name": "rosacafe-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "electron:build": "vue-cli-service electron:build",
-    "electron:serve": "vue-cli-service electron:serve",
-    "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "lint": "vue-cli-service lint"
   },
   "main": "background.js",
   "dependencies": {
@@ -62,7 +58,7 @@
     "vali-admin": "^3.0.0",
     "vee-validate": "^3.3.2",
     "vue-chartjs": "^3.5.0",
-    "vue-cli-plugin-electron-builder": "~2.0.0-rc.1",
+    "vue-select2": "^0.2.6",
     "vue-template-compiler": "^2.6.11"
   }
 }

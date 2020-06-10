@@ -247,6 +247,9 @@
     export default {
         name: "ProdutoFormComponent",
         props: ['id'],
+        components: {
+            "vue-select": require("vue-select")
+        },
         computed: {
             resource: {
                 get() {
