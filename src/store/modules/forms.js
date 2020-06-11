@@ -54,10 +54,10 @@ const actions = {
                 });
             });
     },
-    requestPut({commit, state}) {
-        return this._vm.$http.put(`${state.url}/${state.registro.id}`, state.registro)
+    requestPut({commit, state}, payload) {
+        return this._vm.$http.put(`${state.url}/${state.registro.id}`, payload)
             .then(() => {
-                commit('setRegistro', state.registro);
+                commit('setRegistro', payload);
             }).then(() => {
                 window.iziToast.show({
                     title: 'Sucesso!',

@@ -73,11 +73,17 @@
                     </li>
                     <hr class="mt-2 mb-1" style="width: 200px;">
                     <li>
+                        <router-link class="treeview-item ripple" active-class="active" to="/cadastro/cliente">
+                            <i class="icon fas fa-users"></i>
+                            Clientes
+                        </router-link>
+                    </li>
+                    <!--<li>
                         <router-link class="treeview-item ripple" active-class="active" to="/cadastro/cidade">
                             <i class="icon fas fa-map-marker-alt"></i>
                             Cidades
                         </router-link>
-                    </li>
+                    </li>-->
                 </ul>
             </li>
             <hr class="mt-2 mb-1" style="width: 200px;"><!-- Módulo Cliente -->

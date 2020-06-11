@@ -42,7 +42,7 @@
                 datatableAjaxUrl: 'http://localhost:8000/api/produto?with[]=tamanhos&with[]=grupo',
                 table: '#table',
                 columns: [
-                    {data: 'codigo', name: 'codigo', defaultContent: '--', className: 'text-white'},
+                    {data: 'sku', name: 'sku', defaultContent: '--'},
                     {data: 'grupo.nome', name: 'grupo', defaultContent: '--', className: 'text-capitalize'},
                     {data: 'nome', name: 'nome', defaultContent: '--', className: 'text-capitalize'},
                 ]
