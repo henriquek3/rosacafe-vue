@@ -6,9 +6,7 @@ const state = {
 
 // getters
 const getters = {
-    estoques: state => {
-        return state.estoque;
-    }
+    estoques: state => state.estoque,
 }
 
 // actions
@@ -16,8 +14,8 @@ const actions = {
     clearEstoque(context) {
         context.commit('delete')
     },
-    getData(context) {
-        this._vm.$http.get('produto/estoque?with[]=tamanho&with[]=cor')
+    getData(context, payload) {
+        this._vm.$http.get(`produto/estoque?produtoId=${payload}&with[]=tamanho&with[]=cor`)
             .then(response => {
                 context.commit('update', response.data.data)
             })
@@ -38,7 +36,7 @@ const actions = {
 // mutations
 const mutations = {
     delete(state) {
-        state.dataTable = []
+        state.estoque = []
     },
     update(state, payload) {
         state.estoque = payload

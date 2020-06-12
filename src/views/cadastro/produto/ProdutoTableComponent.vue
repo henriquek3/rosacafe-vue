@@ -52,12 +52,14 @@
         mounted() {
             this.initDatatable(this)
             this.resetRegistro()
+            this.clearEstoque()
         },
         methods: {
             ...mapActions({
                 resetRegistro: 'forms/resetRegistro',
                 loadResource: 'forms/loadResource',
                 initDatatable: 'datatables/initDatatables',
+                clearEstoque: 'estoque/clearEstoque'
             }),
         },
     }

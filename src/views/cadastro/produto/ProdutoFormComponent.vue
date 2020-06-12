@@ -11,6 +11,8 @@
                                 <button class="btn btn-primary btn-sm shadow-sm ripple" @click="newResource()">
                                     <i class="fa fa-plus mr-0"></i>
                                 </button>
+                                <button type="button" class="btn btn-secondary icon-btn shadow-sm ripple" id="add-imagem"><i
+                                        class="fas fa-images"></i></button>
                             </template>
                             <h3 class="title" v-else>Novo Produto</h3>
                         </div>
@@ -162,7 +164,7 @@
                                                        type="text"
                                                        placeholder="0,00"
                                                        name="valor"
-                                                       v-model="resource.valor"
+                                                       v-model.lazy="resource.valor"
                                                        :class="classes"
                                                 >
                                                 <span class="invalid-feedback">{{errors[0]}}</span>
@@ -192,13 +194,14 @@
                 </ValidationObserver>
             </div>
         </div>
-        <ProdutoTamanhoCorEstoqueComponent v-if="id" :produtoId="id"></ProdutoTamanhoCorEstoqueComponent>
+        <ProdutoTamanhoCorEstoqueComponent :produtoId="id"></ProdutoTamanhoCorEstoqueComponent>
     </article>
 </template>
 
 <script>
     import {mapActions} from "vuex";
     import ProdutoTamanhoCorEstoqueComponent from "./ProdutoTamanhoCorEstoqueComponent";
+    import {VMoney} from 'v-money'
 
     export default {
         name: "ProdutoFormComponent",
@@ -225,6 +228,14 @@
                 ciclo: [],
                 composicao: [],
                 campanha: [],
+                money: {
+                    decimal: ',',
+                    thousands: '.',
+                    prefix: 'R$ ',
+                    suffix: ' #',
+                    precision: 2,
+                    masked: false /* doesn't work with directive */
+                }
             }
         },
         mounted() {
@@ -288,7 +299,8 @@
             this.getCiclo()
             this.getComposicao()
             this.getCampanha()
-        }
+        },
+        directives: {money: VMoney}
     }
 </script>
 

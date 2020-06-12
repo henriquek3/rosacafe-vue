@@ -15,27 +15,32 @@
                             <tr>
                                 <th scope="col">Tamanho</th>
                                 <th scope="col">Cor</th>
-                                <th scope="col">Estoque</th>
+                                <th scope="col" class="text-center">Estoque</th>
                                 <th scope="col" width="10%" class="text-center">Ação</th>
                             </tr>
                             </thead>
                             <tbody v-if="estoques.length">
                             <tr v-for="estoque in estoques" :key="estoque.id">
                                 <td>{{estoque.tamanho.nome}}</td>
-                                <td><span :style="{backgroundColor: estoque.cor.codigo ? estoque.cor.codigo : ''}" style="color:white" class="badge">{{estoque.cor.codigo}}</span>
+                                <td>
+                                    <span :style="{backgroundColor: estoque.cor.codigo ? estoque.cor.codigo : ''}"
+                                          style="color:white"
+                                          class="badge">{{estoque.cor.codigo}}</span>
                                     {{estoque.cor.nome}}
                                 </td>
-                                <td>{{estoque.quantidade}}</td>
+                                <td class="text-center">{{estoque.quantidade}}</td>
                                 <td class="text-center">
                                     <button class='btn btn-sm btn-primary shadow-sm ripple'><i class='fas fa-pen mr-0'></i></button>
                                 </td>
                             </tr>
                             </tbody>
-                            <tbody v-else>
+                            <tfoot>
                             <tr>
-                                <td colspan="4">Nenhum estoque cadastrado para este produto.</td>
+                                <td colspan="2" class="text-right">Total:</td>
+                                <td class="text-center font-weight-bold">{{totalEstoque}}</td>
+                                <td></td>
                             </tr>
-                            </tbody>
+                            </tfoot>
                         </table>
                     </div>
                     <div class="tile-footer"></div>
@@ -148,6 +153,13 @@
                     this.$store.commit('estoque/push', value);
                 }
             },
+            totalEstoque() {
+                let total = 0;
+                this.estoques.map(function (item) {
+                    return total += item.quantidade;
+                })
+                return total;
+            },
         },
         data() {
             return {
@@ -176,15 +188,17 @@
                 this.resource.produto_id = this.produtoId;
                 this.$http.post('/produto/estoque', this.resource)
                     .then((response) => {
-                        window.iziToast.show({
-                            title: 'Sucesso!',
-                            message: 'O registro foi atualizado com sucesso!',
-                            color: 'green',
-                            position: 'topCenter',
-                        });
                         response.data.cor = {nome: window.$('#cor_id option:selected').text()}
                         response.data.tamanho = {nome: window.$('#tamanho_id option:selected').text()}
                         this.estoques = response.data;
+                    })
+                    .then(() => {
+                        window.$('#modalEstoque').modal('hide');
+                        this.$swal({
+                            title: "Sucesso!",
+                            text: "O registro foi atualizado com sucesso!",
+                            icon: "success",
+                        });
                     })
                     .catch(err => {
                         console.log(err.message)
@@ -199,7 +213,6 @@
             },
         },
         mounted() {
-            window.k = this
             this.getTamanho()
             this.getCor()
             window.$('#openModalEstoque').click(() => {
@@ -209,7 +222,7 @@
                 this.resource.quantidade = null;
                 window.$('#modalEstoque').modal('show')
             });
-            this.$store.dispatch('estoque/getData');
+            this.$store.dispatch('estoque/getData', this.produtoId);
         }
     }
 </script>
