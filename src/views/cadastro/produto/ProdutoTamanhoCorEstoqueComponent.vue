@@ -11,12 +11,12 @@
                     </div>
                     <div class="tile-body">
                         <table class="table table-bordered">
+                            <caption class="text-danger text-center">* Não é possível editar a quantidade em estoque após o lançamento *</caption>
                             <thead>
                             <tr>
                                 <th scope="col">Tamanho</th>
                                 <th scope="col">Cor</th>
                                 <th scope="col" class="text-center">Estoque</th>
-                                <th scope="col" width="10%" class="text-center">Ação</th>
                             </tr>
                             </thead>
                             <tbody v-if="estoques.length">
@@ -29,16 +29,12 @@
                                     {{estoque.cor.nome}}
                                 </td>
                                 <td class="text-center">{{estoque.quantidade}}</td>
-                                <td class="text-center">
-                                    <button class='btn btn-sm btn-primary shadow-sm ripple'><i class='fas fa-pen mr-0'></i></button>
-                                </td>
                             </tr>
                             </tbody>
                             <tfoot>
                             <tr>
                                 <td colspan="2" class="text-right">Total:</td>
                                 <td class="text-center font-weight-bold">{{totalEstoque}}</td>
-                                <td></td>
                             </tr>
                             </tfoot>
                         </table>

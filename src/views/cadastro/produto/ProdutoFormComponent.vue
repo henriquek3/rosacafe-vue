@@ -2,17 +2,19 @@
     <article>
         <div class="row">
             <div class="col-md-12">
-                <ValidationObserver v-slot="{invalid}">
+                <ValidationObserver ref="form" v-slot="{invalid}">
                     <div class="tile">
 
                         <div class="tile-title-w-btn line-head">
                             <template v-if="id">
                                 <h3 class="title">Editar Produto</h3>
-                                <button class="btn btn-primary btn-sm shadow-sm ripple" @click="newResource()">
-                                    <i class="fa fa-plus mr-0"></i>
-                                </button>
-                                <button type="button" class="btn btn-secondary icon-btn shadow-sm ripple" id="add-imagem"><i
-                                        class="fas fa-images"></i></button>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary btn-sm shadow-sm ripple" @click="newResource()">
+                                        <i class="fa fa-plus ml-1"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-secondary shadow-sm ripple" id="add-imagem"><i
+                                            class="fas fa-images"></i></button>
+                                </div>
                             </template>
                             <h3 class="title" v-else>Novo Produto</h3>
                         </div>
@@ -29,7 +31,7 @@
                                         <input class="form-control"
                                                name="nome"
                                                :class="classes"
-                                               placeholder="Nome da Produto"
+                                               placeholder="Nome do Produto"
                                                v-model="resource.nome"
                                                type="text"
                                         >
@@ -136,8 +138,8 @@
                                 </div>
 
                                 <div class="form-group col-md-3" data-title="Stock Keeping Unit" data-toggle="tooltip">
-                                    <ValidationProvider name="Código" v-slot="{valid, errors,classes}"
-                                                        rules="required|min:3|max:10">
+                                    <ValidationProvider name="Código" v-slot="{valid, errors, classes}" vid="sku"
+                                                        rules="required|min_value:4">
                                         <label>Código SKU</label>
                                         <input class="form-control"
                                                name="sku"
@@ -151,7 +153,7 @@
                                 </div>
 
                                 <div class="form-group col-xl-3" data-title="Utilize o ponto ao invés da virgula"
-                                     data-toggle="tooptip">
+                                     data-toggle="tooltip">
                                     <ValidationProvider name="Valor" v-slot="{valid, errors,classes}"
                                                         rules="required">
                                         <label class="control-label" for="valor">Valor</label>
@@ -159,14 +161,15 @@
                                             <div class="input-group">
                                                 <div class="input-group-prepend"><span class="input-group-text">R$</span>
                                                 </div>
-                                                <input class="form-control"
+                                                <money class="form-control"
                                                        id="valor"
                                                        type="text"
                                                        placeholder="0,00"
                                                        name="valor"
                                                        v-model.lazy="resource.valor"
+                                                       v-bind="money"
                                                        :class="classes"
-                                                >
+                                                ></money>
                                                 <span class="invalid-feedback">{{errors[0]}}</span>
                                             </div>
                                         </div>
@@ -201,12 +204,13 @@
 <script>
     import {mapActions} from "vuex";
     import ProdutoTamanhoCorEstoqueComponent from "./ProdutoTamanhoCorEstoqueComponent";
-    import {VMoney} from 'v-money'
+    import {Money} from 'v-money'
 
     export default {
         name: "ProdutoFormComponent",
         components: {
-            ProdutoTamanhoCorEstoqueComponent
+            ProdutoTamanhoCorEstoqueComponent,
+            Money
         },
         props: ['id'],
         computed: {
@@ -231,8 +235,6 @@
                 money: {
                     decimal: ',',
                     thousands: '.',
-                    prefix: 'R$ ',
-                    suffix: ' #',
                     precision: 2,
                     masked: false /* doesn't work with directive */
                 }
@@ -275,6 +277,7 @@
                 if (this.id) {
                     this.requestPut(this.resource);
                 } else {
+                    window.$_app = this;
                     this.requestCreate(this.resource)
                 }
             },
@@ -300,7 +303,6 @@
             this.getComposicao()
             this.getCampanha()
         },
-        directives: {money: VMoney}
     }
 </script>
 

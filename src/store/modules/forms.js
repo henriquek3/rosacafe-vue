@@ -21,21 +21,24 @@ const actions = {
         router.push(`${payload.path}/${payload.id}`);
     },
     requestCreate({commit, state}, payload) {
-        return this._vm.$http.post(`${state.url}`, payload)
+        this._vm.$http.post(`${state.url}`, payload)
             .then((response) => {
                 commit('setRegistro', payload);
                 router.push(`${state.callbackUrl}/${response.data.id}`);
             }).then(() => {
-                window.iziToast.show({
-                    title: 'Sucesso!',
-                    message: 'O registro foi atualizado com sucesso!',
-                    color: 'green',
-                    position: 'topCenter',
-                });
-
-            })
+            window.iziToast.show({
+                title: 'Sucesso!',
+                message: 'O registro foi atualizado com sucesso!',
+                color: 'green',
+                position: 'topCenter',
+            });
+        })
             .catch(err => {
-                console.log(err.message)
+                if (err.response.data.errors) {
+                    window.$_app.$refs.form.setErrors(
+                        err.response.data.errors
+                    );
+                }
                 window.iziToast.show({
                     title: 'Atenção!',
                     message: 'Houve um problema para processar sua requisição!',
@@ -52,7 +55,8 @@ const actions = {
                     position: 'bottomCenter',
                     timeout: 20000
                 });
-            });
+            })
+        ;
     },
     requestPut({commit, state}, payload) {
         return this._vm.$http.put(`${state.url}/${state.registro.id}`, payload)
