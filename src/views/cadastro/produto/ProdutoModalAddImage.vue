@@ -41,27 +41,23 @@
         props: [
             'produtoId',
         ],
-        computed: {
-            file() {
-                return this.$refs.form.image.files[0];
-            },
-        },
         data() {
             return {
-                image: null
+                image: null,
+                resource: null,
             }
         },
         methods: {
             sendRequest() {
-                this.resource = new FormData();
-                this.resource.append('image', this.file, this.file.fileName);
-                this.resource.append('produto_id', this.produtoId);
+                let resource = new FormData();
+                resource.append('image', this.$refs.form.image.files[0], this.$refs.form.image.files[0].fileName);
+                resource.append('produto_id', this.produtoId);
 
-                this.$http.post('/produto/imagem', this.resource, {
+                this.$http.post('/produto/imagem', resource, {
                     'accept': 'application/json',
                     'Content-Type': `multipart/form-data;`,
                 }).then(response => {
-                    console.log(response)
+                    console.log(response.data);
                     window.$('.modal').modal('hide');
                     this.$swal({
                         title: "Sucesso!",
@@ -86,7 +82,7 @@
             }
         },
         mounted() {
-            console.log()
+            window._vue = this
         }
     }
 </script>

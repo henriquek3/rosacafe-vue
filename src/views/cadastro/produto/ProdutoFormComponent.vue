@@ -144,10 +144,11 @@
 
                                 <div class="form-group col-md-3" data-title="Stock Keeping Unit" data-toggle="tooltip">
                                     <ValidationProvider name="Código" v-slot="{valid, errors, classes}" vid="sku"
-                                                        rules="required|min_value:4">
-                                        <label>Código SKU</label>
+                                                        rules="required|min:3">
+                                        <label for="sku">Código SKU</label>
                                         <input class="form-control"
                                                name="sku"
+                                               id="sku"
                                                placeholder="Código do Produto"
                                                v-model="resource.sku"
                                                :class="classes"
@@ -204,6 +205,7 @@
         </div>
         <ProdutoTamanhoCorEstoqueComponent :produtoId="id"></ProdutoTamanhoCorEstoqueComponent>
         <ProdutoModalAddImage :produtoId="id"></ProdutoModalAddImage>
+        <ProdutoImageViewComponent :produtoId="id"></ProdutoImageViewComponent>
     </article>
 </template>
 
@@ -212,13 +214,15 @@
     import ProdutoTamanhoCorEstoqueComponent from "./ProdutoTamanhoCorEstoqueComponent";
     import {Money} from 'v-money'
     import ProdutoModalAddImage from "./ProdutoModalAddImage";
+    import ProdutoImageViewComponent from "./ProdutoImageViewComponent";
 
     export default {
         name: "ProdutoFormComponent",
         components: {
             ProdutoTamanhoCorEstoqueComponent,
             Money,
-            ProdutoModalAddImage
+            ProdutoModalAddImage,
+            ProdutoImageViewComponent,
         },
         props: ['id'],
         computed: {
