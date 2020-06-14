@@ -30,6 +30,7 @@
         props: [
             'produtoId',
             'image',
+            'new',
         ],
         data() {
             return {
@@ -37,7 +38,8 @@
             }
         },
         watch: {
-            image: 'updateImages'
+            image: 'updateImages',
+            new: 'emptyImages'
         },
         methods: {
             getImages() {
@@ -80,6 +82,10 @@
             updateImages() {
                 this.images.push(this.image)
             },
+            emptyImages() {
+                console.log('emptyImages')
+                this.images = []
+            }
         },
         mounted() {
             this.getImages()

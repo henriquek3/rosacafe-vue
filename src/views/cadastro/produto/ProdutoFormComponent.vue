@@ -205,7 +205,7 @@
         </div>
         <ProdutoTamanhoCorEstoqueComponent :produtoId="id"></ProdutoTamanhoCorEstoqueComponent>
         <ProdutoModalAddImage :image="newImage" @addArrayImage="newImage= $event" :produtoId="id"></ProdutoModalAddImage>
-        <ProdutoImageViewComponent :image="newImage" :produtoId="id"></ProdutoImageViewComponent>
+        <ProdutoImageViewComponent :image="newImage" :new="newFormResource" :produtoId="id"></ProdutoImageViewComponent>
     </article>
 </template>
 
@@ -240,6 +240,7 @@
                 urlApi: '/produto',
                 urlCallback: '/cadastro/produto',
                 newImage: null,
+                newFormResource: false,
                 marca: [],
                 grupo: [],
                 ciclo: [],
@@ -295,6 +296,7 @@
                 }
             },
             newResource() {
+                this.newFormResource = true;
                 this.resetRegistro()
                 this.$router.push(`${this.urlCallback}/novo`)
             },

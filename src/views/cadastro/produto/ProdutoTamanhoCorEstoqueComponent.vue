@@ -157,6 +157,9 @@
                 return total;
             },
         },
+        watch: {
+            produtoId: 'emptyEstoque'
+        },
         data() {
             return {
                 resource: {
@@ -207,6 +210,10 @@
                         });
                     });
             },
+            emptyEstoque() {
+                this.estoques = [];
+                this.$store.dispatch('estoque/clearEstoque');
+            }
         },
         mounted() {
             this.getTamanho()
