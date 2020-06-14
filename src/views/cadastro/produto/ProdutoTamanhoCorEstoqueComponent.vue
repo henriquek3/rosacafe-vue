@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <div class="modal animate__animated animate__backInDown" tabindex="-1" role="dialog" id="modalEstoque">
+        <div class="modal animate__animated animate__backInDown animate__faster" tabindex="-1" role="dialog" id="modalEstoque">
             <div class="modal-dialog">
                 <ValidationObserver v-slot="{invalid}">
                     <div class="modal-content">

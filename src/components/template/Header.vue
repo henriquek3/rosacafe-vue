@@ -105,7 +105,7 @@
         name: "Header",
         methods: {
             logout() {
-                store.dispatch('logout')
+                store.dispatch('login/logout')
                     .then(() => {
                         this.$router.push({name: 'auth.login'});
                     })

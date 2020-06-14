@@ -12,8 +12,13 @@
                                     <button class="btn btn-primary btn-sm shadow-sm ripple" @click="newResource()">
                                         <i class="fa fa-plus ml-1"></i>
                                     </button>
-                                    <button type="button" class="btn btn-secondary shadow-sm ripple" id="add-imagem"><i
-                                            class="fas fa-images"></i></button>
+                                    <button type="button"
+                                            class="btn btn-secondary shadow-sm ripple"
+                                            data-toggle="modal"
+                                            data-target="#modal-add-imagem"
+                                    >
+                                        <i class="fas fa-images"></i>
+                                    </button>
                                 </div>
                             </template>
                             <h3 class="title" v-else>Novo Produto</h3>
@@ -198,6 +203,7 @@
             </div>
         </div>
         <ProdutoTamanhoCorEstoqueComponent :produtoId="id"></ProdutoTamanhoCorEstoqueComponent>
+        <ProdutoModalAddImage :produtoId="id"></ProdutoModalAddImage>
     </article>
 </template>
 
@@ -205,12 +211,14 @@
     import {mapActions} from "vuex";
     import ProdutoTamanhoCorEstoqueComponent from "./ProdutoTamanhoCorEstoqueComponent";
     import {Money} from 'v-money'
+    import ProdutoModalAddImage from "./ProdutoModalAddImage";
 
     export default {
         name: "ProdutoFormComponent",
         components: {
             ProdutoTamanhoCorEstoqueComponent,
-            Money
+            Money,
+            ProdutoModalAddImage
         },
         props: ['id'],
         computed: {
