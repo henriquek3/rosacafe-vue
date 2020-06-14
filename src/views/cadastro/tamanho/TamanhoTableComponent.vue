@@ -38,7 +38,7 @@
 
     export default {
         name: "TamanhoTableComponent",
-        data: function () {
+        data() {
             return {
                 error: false,
                 datatableAjaxUrl: 'http://localhost:8000/api/tamanho',

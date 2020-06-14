@@ -36,7 +36,7 @@
 
     export default {
         name: "ProdutoTableComponent",
-        data: function () {
+        data() {
             return {
                 error: false,
                 datatableAjaxUrl: 'http://localhost:8000/api/produto?with[]=tamanhos&with[]=grupo',

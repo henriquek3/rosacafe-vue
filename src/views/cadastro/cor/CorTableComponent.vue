@@ -35,16 +35,14 @@
 
     export default {
         name: "CorTableComponent",
-        data: function () {
+        data() {
             return {
-                error: false,
                 datatableAjaxUrl: 'http://localhost:8000/api/cor',
                 table: '#table',
                 columns: [
                     {
                         data: 'codigo', name: 'codigo', defaultContent: '--', className: 'text-white',
-                        render: {},
-                        createdCell: function(td, cellData){
+                        createdCell: function (td, cellData) {
                             window.$(td).css('backgroundColor', cellData)
                         },
                     },
@@ -52,7 +50,6 @@
                 ]
             }
         },
-        computed: {},
         mounted() {
             this.initDatatable(this)
             this.resetRegistro()
