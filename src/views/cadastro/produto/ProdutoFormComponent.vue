@@ -204,8 +204,8 @@
             </div>
         </div>
         <ProdutoTamanhoCorEstoqueComponent :produtoId="id"></ProdutoTamanhoCorEstoqueComponent>
-        <ProdutoModalAddImage :produtoId="id"></ProdutoModalAddImage>
-        <ProdutoImageViewComponent :produtoId="id"></ProdutoImageViewComponent>
+        <ProdutoModalAddImage :image="newImage" @addArrayImage="newImage= $event" :produtoId="id"></ProdutoModalAddImage>
+        <ProdutoImageViewComponent :image="newImage" :produtoId="id"></ProdutoImageViewComponent>
     </article>
 </template>
 
@@ -239,6 +239,7 @@
             return {
                 urlApi: '/produto',
                 urlCallback: '/cadastro/produto',
+                newImage: null,
                 marca: [],
                 grupo: [],
                 ciclo: [],

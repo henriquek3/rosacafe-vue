@@ -27,11 +27,17 @@
 <script>
     export default {
         name: "ProdutoImageViewComponent",
-        props: ['produtoId'],
+        props: [
+            'produtoId',
+            'image',
+        ],
         data() {
             return {
                 images: []
             }
+        },
+        watch: {
+            image: 'updateImages'
         },
         methods: {
             getImages() {
@@ -70,7 +76,10 @@
                         });
                     })
                 ;
-            }
+            },
+            updateImages() {
+                this.images.push(this.image)
+            },
         },
         mounted() {
             this.getImages()

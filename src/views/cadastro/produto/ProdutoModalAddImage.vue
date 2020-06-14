@@ -40,12 +40,10 @@
         name: "ProdutoModalAddImage",
         props: [
             'produtoId',
+            'image',
         ],
         data() {
-            return {
-                image: null,
-                resource: null,
-            }
+            return {}
         },
         methods: {
             sendRequest() {
@@ -57,7 +55,7 @@
                     'accept': 'application/json',
                     'Content-Type': `multipart/form-data;`,
                 }).then(response => {
-                    console.log(response.data);
+                    this.$emit('addArrayImage', response.data)
                     window.$('.modal').modal('hide');
                     this.$swal({
                         title: "Sucesso!",
@@ -82,7 +80,7 @@
             }
         },
         mounted() {
-            window._vue = this
+
         }
     }
 </script>
